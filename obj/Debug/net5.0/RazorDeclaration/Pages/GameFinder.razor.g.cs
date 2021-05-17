@@ -13,77 +13,78 @@ namespace BoardWatcherClient.Pages
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Components;
 #nullable restore
-#line 1 "c:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\_Imports.razor"
+#line 1 "C:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\_Imports.razor"
 using System.Net.Http;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 2 "c:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\_Imports.razor"
+#line 2 "C:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\_Imports.razor"
 using System.Net.Http.Json;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 3 "c:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\_Imports.razor"
+#line 3 "C:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\_Imports.razor"
 using Microsoft.AspNetCore.Components.Forms;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 4 "c:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\_Imports.razor"
+#line 4 "C:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\_Imports.razor"
 using Microsoft.AspNetCore.Components.Routing;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 5 "c:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\_Imports.razor"
+#line 5 "C:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\_Imports.razor"
 using Microsoft.AspNetCore.Components.Web;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 6 "c:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\_Imports.razor"
+#line 6 "C:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\_Imports.razor"
 using Microsoft.AspNetCore.Components.Web.Virtualization;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 7 "c:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\_Imports.razor"
+#line 7 "C:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\_Imports.razor"
 using Microsoft.AspNetCore.Components.WebAssembly.Http;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 8 "c:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\_Imports.razor"
+#line 8 "C:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\_Imports.razor"
 using Microsoft.JSInterop;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 9 "c:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\_Imports.razor"
+#line 9 "C:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\_Imports.razor"
 using BoardWatcherClient;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 10 "c:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\_Imports.razor"
+#line 10 "C:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\_Imports.razor"
 using BoardWatcherClient.Shared;
 
 #line default
 #line hidden
 #nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/fetchdata")]
-    public partial class FetchData : Microsoft.AspNetCore.Components.ComponentBase
+    [Microsoft.AspNetCore.Components.LayoutAttribute(typeof(GameFinderLayout))]
+    [Microsoft.AspNetCore.Components.RouteAttribute("/")]
+    public partial class GameFinder : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
@@ -91,30 +92,19 @@ using BoardWatcherClient.Shared;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 37 "c:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\Pages\FetchData.razor"
+#line 32 "C:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\Pages\GameFinder.razor"
        
-    private WeatherForecast[] forecasts;
+    private GameInputModel gameInputModel = new();
 
-    protected override async Task OnInitializedAsync()
+    private void HandleValidSubmit()
     {
-        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json");
-    }
-
-    public class WeatherForecast
-    {
-        public DateTime Date { get; set; }
-
-        public int TemperatureC { get; set; }
-
-        public string Summary { get; set; }
-
-        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+        NavigationManager.NavigateTo("chess/" + gameInputModel.Id);
     }
 
 #line default
 #line hidden
 #nullable disable
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private HttpClient Http { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavigationManager { get; set; }
     }
 }
 #pragma warning restore 1591
