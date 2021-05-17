@@ -406,8 +406,6 @@ C:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\obj\Debug\net5.0\Boa
 C:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\obj\Debug\net5.0\BoardWatcherClient.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\obj\Debug\net5.0\BoardWatcherClient.RazorComponent.input.cache
 C:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\obj\Debug\net5.0\RazorDeclaration\App.razor.g.cs
-C:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\obj\Debug\net5.0\RazorDeclaration\Pages\Counter.razor.g.cs
-C:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\obj\Debug\net5.0\RazorDeclaration\Pages\FetchData.razor.g.cs
 C:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\obj\Debug\net5.0\RazorDeclaration\Pages\Index.razor.g.cs
 C:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\obj\Debug\net5.0\RazorDeclaration\Shared\SurveyPrompt.razor.g.cs
 C:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\obj\Debug\net5.0\RazorDeclaration\_Imports.razor.g.cs
@@ -419,8 +417,6 @@ C:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\obj\Debug\net5.0\Boa
 C:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\obj\Debug\net5.0\BoardWatcherClient.TagHelpers.output.cache
 C:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\obj\Debug\net5.0\BoardWatcherClient.RazorCoreGenerate.cache
 C:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\obj\Debug\net5.0\Razor\App.razor.g.cs
-C:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\obj\Debug\net5.0\Razor\Pages\Counter.razor.g.cs
-C:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\obj\Debug\net5.0\Razor\Pages\FetchData.razor.g.cs
 C:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\obj\Debug\net5.0\Razor\Pages\Index.razor.g.cs
 C:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\obj\Debug\net5.0\Razor\Shared\SurveyPrompt.razor.g.cs
 C:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\obj\Debug\net5.0\Razor\_Imports.razor.g.cs
@@ -634,3 +630,13 @@ C:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\obj\Debug\net5.0\ref
 C:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\obj\Debug\net5.0\BoardWatcherClient.pdb
 C:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\obj\Debug\net5.0\serviceworkers\wwwroot\service-worker.js
 C:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\obj\Debug\net5.0\service-worker-assets.js
+C:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\bin\Debug\net5.0\Data\TestData\piecesTest.json
+C:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\obj\Debug\net5.0\RazorDeclaration\Pages\Checkers.razor.g.cs
+C:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\obj\Debug\net5.0\RazorDeclaration\Pages\GameFinder.razor.g.cs
+C:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\obj\Debug\net5.0\RazorDeclaration\Shared\GameFinderLayout.razor.g.cs
+C:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\obj\Debug\net5.0\RazorDeclaration\Pages\Chess.razor.g.cs
+C:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\obj\Debug\net5.0\Razor\Pages\Checkers.razor.g.cs
+C:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\obj\Debug\net5.0\Razor\Pages\GameFinder.razor.g.cs
+C:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\obj\Debug\net5.0\Razor\Shared\GameFinderLayout.razor.g.cs
+C:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\obj\Debug\net5.0\Razor\Pages\Chess.razor.g.cs
+C:\Users\Vander\Documents\Programming\C#\BoardWatcherClient\obj\Debug\net5.0\scopedcss\Pages\Chess.razor.rz.scp.css

@@ -8,138 +8,6 @@
   "ProjectWorkspaceState": {
     "TagHelpers": [
       {
-        "HashCode": 890547919,
-        "Kind": "Components.Component",
-        "Name": "BoardWatcherClient.App",
-        "AssemblyName": "BoardWatcherClient",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "App"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "BoardWatcherClient.App"
-        }
-      },
-      {
-        "HashCode": -1950363396,
-        "Kind": "Components.Component",
-        "Name": "BoardWatcherClient.App",
-        "AssemblyName": "BoardWatcherClient",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "BoardWatcherClient.App"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "BoardWatcherClient.App",
-          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
-        }
-      },
-      {
-        "HashCode": 1999389543,
-        "Kind": "Components.Component",
-        "Name": "BoardWatcherClient.Pages.Counter",
-        "AssemblyName": "BoardWatcherClient",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "Counter"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "BoardWatcherClient.Pages.Counter"
-        }
-      },
-      {
-        "HashCode": -1180917035,
-        "Kind": "Components.Component",
-        "Name": "BoardWatcherClient.Pages.Counter",
-        "AssemblyName": "BoardWatcherClient",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "BoardWatcherClient.Pages.Counter"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "BoardWatcherClient.Pages.Counter",
-          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
-        }
-      },
-      {
-        "HashCode": -1684217564,
-        "Kind": "Components.Component",
-        "Name": "BoardWatcherClient.Pages.FetchData",
-        "AssemblyName": "BoardWatcherClient",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "FetchData"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "BoardWatcherClient.Pages.FetchData"
-        }
-      },
-      {
-        "HashCode": 192656903,
-        "Kind": "Components.Component",
-        "Name": "BoardWatcherClient.Pages.FetchData",
-        "AssemblyName": "BoardWatcherClient",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "BoardWatcherClient.Pages.FetchData"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "BoardWatcherClient.Pages.FetchData",
-          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
-        }
-      },
-      {
-        "HashCode": -424207025,
-        "Kind": "Components.Component",
-        "Name": "BoardWatcherClient.Pages.Index",
-        "AssemblyName": "BoardWatcherClient",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "Index"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "BoardWatcherClient.Pages.Index"
-        }
-      },
-      {
-        "HashCode": -259549285,
-        "Kind": "Components.Component",
-        "Name": "BoardWatcherClient.Pages.Index",
-        "AssemblyName": "BoardWatcherClient",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "BoardWatcherClient.Pages.Index"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "BoardWatcherClient.Pages.Index",
-          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
-        }
-      },
-      {
         "HashCode": 1397035300,
         "Kind": "Components.Component",
         "Name": "BoardWatcherClient.Shared.SurveyPrompt",
@@ -318,6 +186,287 @@
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
           "Common.TypeName": "BoardWatcherClient.Shared.NavMenu",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": 889726381,
+        "Kind": "Components.Component",
+        "Name": "BoardWatcherClient.Shared.GameFinderLayout",
+        "AssemblyName": "BoardWatcherClient",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "GameFinderLayout"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "Body",
+            "TypeName": "Microsoft.AspNetCore.Components.RenderFragment",
+            "Documentation": "\n            <summary>\n            Gets the content to be rendered inside the layout.\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "Body",
+              "Components.ChildContent": "True"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BoardWatcherClient.Shared.GameFinderLayout"
+        }
+      },
+      {
+        "HashCode": -557949348,
+        "Kind": "Components.Component",
+        "Name": "BoardWatcherClient.Shared.GameFinderLayout",
+        "AssemblyName": "BoardWatcherClient",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BoardWatcherClient.Shared.GameFinderLayout"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "Body",
+            "TypeName": "Microsoft.AspNetCore.Components.RenderFragment",
+            "Documentation": "\n            <summary>\n            Gets the content to be rendered inside the layout.\n            </summary>\n        ",
+            "Metadata": {
+              "Common.PropertyName": "Body",
+              "Components.ChildContent": "True"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BoardWatcherClient.Shared.GameFinderLayout",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": 1929168255,
+        "Kind": "Components.ChildContent",
+        "Name": "BoardWatcherClient.Shared.GameFinderLayout.Body",
+        "AssemblyName": "BoardWatcherClient",
+        "Documentation": "\n            <summary>\n            Gets the content to be rendered inside the layout.\n            </summary>\n        ",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "Body",
+            "ParentTag": "GameFinderLayout"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.None",
+          "Common.TypeName": "BoardWatcherClient.Shared.GameFinderLayout.Body",
+          "Components.IsSpecialKind": "Components.ChildContent"
+        }
+      },
+      {
+        "HashCode": -714390688,
+        "Kind": "Components.ChildContent",
+        "Name": "BoardWatcherClient.Shared.GameFinderLayout.Body",
+        "AssemblyName": "BoardWatcherClient",
+        "Documentation": "\n            <summary>\n            Gets the content to be rendered inside the layout.\n            </summary>\n        ",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "Body",
+            "ParentTag": "BoardWatcherClient.Shared.GameFinderLayout"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.None",
+          "Common.TypeName": "BoardWatcherClient.Shared.GameFinderLayout.Body",
+          "Components.IsSpecialKind": "Components.ChildContent",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": -424207025,
+        "Kind": "Components.Component",
+        "Name": "BoardWatcherClient.Pages.Index",
+        "AssemblyName": "BoardWatcherClient",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "Index"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BoardWatcherClient.Pages.Index"
+        }
+      },
+      {
+        "HashCode": -259549285,
+        "Kind": "Components.Component",
+        "Name": "BoardWatcherClient.Pages.Index",
+        "AssemblyName": "BoardWatcherClient",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BoardWatcherClient.Pages.Index"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BoardWatcherClient.Pages.Index",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": 1289823102,
+        "Kind": "Components.Component",
+        "Name": "BoardWatcherClient.Pages.GameFinder",
+        "AssemblyName": "BoardWatcherClient",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "GameFinder"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BoardWatcherClient.Pages.GameFinder"
+        }
+      },
+      {
+        "HashCode": -1322136697,
+        "Kind": "Components.Component",
+        "Name": "BoardWatcherClient.Pages.GameFinder",
+        "AssemblyName": "BoardWatcherClient",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BoardWatcherClient.Pages.GameFinder"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BoardWatcherClient.Pages.GameFinder",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": 1788159865,
+        "Kind": "Components.Component",
+        "Name": "BoardWatcherClient.Pages.Checkers",
+        "AssemblyName": "BoardWatcherClient",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "Checkers"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BoardWatcherClient.Pages.Checkers"
+        }
+      },
+      {
+        "HashCode": -864980156,
+        "Kind": "Components.Component",
+        "Name": "BoardWatcherClient.Pages.Checkers",
+        "AssemblyName": "BoardWatcherClient",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BoardWatcherClient.Pages.Checkers"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BoardWatcherClient.Pages.Checkers",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": 1499970051,
+        "Kind": "Components.Component",
+        "Name": "BoardWatcherClient.Pages.Chess",
+        "AssemblyName": "BoardWatcherClient",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "Chess"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "gameId",
+            "TypeName": "System.String",
+            "Metadata": {
+              "Common.PropertyName": "gameId"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BoardWatcherClient.Pages.Chess"
+        }
+      },
+      {
+        "HashCode": 2017604090,
+        "Kind": "Components.Component",
+        "Name": "BoardWatcherClient.Pages.Chess",
+        "AssemblyName": "BoardWatcherClient",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BoardWatcherClient.Pages.Chess"
+          }
+        ],
+        "BoundAttributes": [
+          {
+            "Kind": "Components.Component",
+            "Name": "gameId",
+            "TypeName": "System.String",
+            "Metadata": {
+              "Common.PropertyName": "gameId"
+            }
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BoardWatcherClient.Pages.Chess",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
+        "HashCode": 890547919,
+        "Kind": "Components.Component",
+        "Name": "BoardWatcherClient.App",
+        "AssemblyName": "BoardWatcherClient",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "App"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BoardWatcherClient.App"
+        }
+      },
+      {
+        "HashCode": -1950363396,
+        "Kind": "Components.Component",
+        "Name": "BoardWatcherClient.App",
+        "AssemblyName": "BoardWatcherClient",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "BoardWatcherClient.App"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "BoardWatcherClient.App",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },
@@ -13014,6 +13163,11 @@
       "FileKind": "component"
     },
     {
+      "FilePath": "c:\\Users\\Vander\\Documents\\Programming\\C#\\BoardWatcherClient\\Shared\\GameFinderLayout.razor",
+      "TargetPath": "Shared\\GameFinderLayout.razor",
+      "FileKind": "component"
+    },
+    {
       "FilePath": "c:\\Users\\Vander\\Documents\\Programming\\C#\\BoardWatcherClient\\_Imports.razor",
       "TargetPath": "_Imports.razor",
       "FileKind": "componentImport"
@@ -13024,13 +13178,18 @@
       "FileKind": "component"
     },
     {
+      "FilePath": "c:\\Users\\Vander\\Documents\\Programming\\C#\\BoardWatcherClient\\Pages\\Checkers.razor",
+      "TargetPath": "Pages\\Checkers.razor",
+      "FileKind": "component"
+    },
+    {
       "FilePath": "c:\\Users\\Vander\\Documents\\Programming\\C#\\BoardWatcherClient\\Shared\\MainLayout.razor",
       "TargetPath": "Shared\\MainLayout.razor",
       "FileKind": "component"
     },
     {
-      "FilePath": "c:\\Users\\Vander\\Documents\\Programming\\C#\\BoardWatcherClient\\Pages\\Counter.razor",
-      "TargetPath": "Pages\\Counter.razor",
+      "FilePath": "c:\\Users\\Vander\\Documents\\Programming\\C#\\BoardWatcherClient\\Pages\\Chess.razor",
+      "TargetPath": "Pages\\Chess.razor",
       "FileKind": "component"
     },
     {
@@ -13044,8 +13203,8 @@
       "FileKind": "component"
     },
     {
-      "FilePath": "c:\\Users\\Vander\\Documents\\Programming\\C#\\BoardWatcherClient\\Pages\\FetchData.razor",
-      "TargetPath": "Pages\\FetchData.razor",
+      "FilePath": "c:\\Users\\Vander\\Documents\\Programming\\C#\\BoardWatcherClient\\Pages\\GameFinder.razor",
+      "TargetPath": "Pages\\GameFinder.razor",
       "FileKind": "component"
     }
   ],

@@ -1,5 +1,72 @@
 @import '';
 
+/* /Pages/Chess.razor.rz.scp.css */
+
+    .chess-board[b-8zc60ey6cn] {
+        border-spacing: 0;
+        border-collapse: collapse;
+    }
+
+    .chess-board th[b-8zc60ey6cn] {
+        padding: .5em;
+    }
+
+    .chess-board th+th[b-8zc60ey6cn] {
+        border-bottom: 1px solid #000;
+    }
+
+    .chess-board th:first-child[b-8zc60ey6cn],
+    .chess-board td:last-child[b-8zc60ey6cn] {
+        border-right: 1px solid #000;
+    }
+
+    .chess-board tr:last-child td[b-8zc60ey6cn] {
+        border-bottom: 1px solid;
+    }
+
+    .chess-board th:empty[b-8zc60ey6cn] {
+        border: none;
+    }
+
+    .chess-board td[b-8zc60ey6cn] {
+        width: 1.5em;
+        height: 1.5em;
+        text-align: center;
+        font-size: 3.5em;
+        line-height: 0;
+    }
+
+    .chess-board .light[b-8zc60ey6cn] {
+        background: #eee;
+    }
+
+    .chess-board .dark[b-8zc60ey6cn] {
+        background: #aaa;
+    }
+
+    .btn[b-8zc60ey6cn] {
+        margin-top: 1em;
+        margin-inline: 5px;
+    }
+
+    .stateMenu[b-8zc60ey6cn] {
+        margin-left: 5em;
+    }
+
+    .flex-container[b-8zc60ey6cn] {
+        display: flex;
+    }
+
+    .flex-child[b-8zc60ey6cn] {
+        flex: 1;
+    } 
+
+    .center[b-8zc60ey6cn] {
+        display: flex;
+        justify-content: center;
+    }
+    
+    
 /* /Shared/MainLayout.razor.rz.scp.css */
 .page[b-h91pvrjvuq] {
     position: relative;
