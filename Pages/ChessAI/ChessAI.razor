@@ -137,7 +137,6 @@ else
     protected override async Task OnInitializedAsync()
     {
         gameId = gameId ?? "Not provided";
-        gameType = gameType ?? "CV";
         gameBoard = await GameStateService.GetPieceData();
         Move[] moves = new Move[]
         {
