@@ -1,4 +1,7 @@
-﻿<div class="top-row pl-4 navbar navbar-dark">
+﻿@inject RoutingService RoutingService
+@inject IJSRuntime JSRuntime
+
+<div class="top-row pl-4 navbar navbar-dark">
     <a class="navbar-brand" href="">BoardWatcherClient</a>
     <button class="navbar-toggler" @onclick="ToggleNavMenu">
         <span class="navbar-toggler-icon"></span>
@@ -8,12 +11,12 @@
 <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
     <ul class="nav flex-column">
         <li class="nav-item px-3">
-            <NavLink class="nav-link" href="chess" Match="NavLinkMatch.All">
+            <NavLink class="nav-link" href="@($"chess/CV/{gameId}")" Match="NavLinkMatch.All">
                 <span class="oi oi-home" aria-hidden="true"></span> Chess OpenCV
             </NavLink>
         </li>
         <li class="nav-item px-3">
-            <NavLink class="nav-link" href="checkers">
+            <NavLink class="nav-link" href="@($"chess/AI/{gameId}")">
                 <span class="oi oi-target" aria-hidden="true"></span> Chess AI
             </NavLink>
         </li>
@@ -22,8 +25,13 @@
 
 @code {
     private bool collapseNavMenu = true;
-
+    private int gameId = 0;
     private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    protected override void OnInitialized()
+    {
+        gameId = RoutingService.getGameId();
+    }
 
     private void ToggleNavMenu()
     {

@@ -1,5 +1,4 @@
-﻿@page "/chess"
-@page "/chess/{gameId}"
+﻿@page "/chess/{gameType?}/{gameId?}"
 
 @using BoardWatcherClient
 @inject ChessGameStateService GameStateService
@@ -11,7 +10,15 @@
 @if (gameId != null)
 {
     <div class="center">
-        <h1>Game ID: @gameId</h1>
+        @if (gameType == "CV")
+        {
+            <h1>Running in OpenCV Mode</h1>
+        }
+        else
+        {
+            <h1>Running in AI Mode</h1>
+        }
+        <h1>, Game ID: @gameId</h1>
     </div>
 }
 @if (gameBoard == null)
@@ -126,39 +133,47 @@ else
                     </tr>
                 </tbody>
             </table>
-            <div class="stateMenu">
-                <button class="btn btn-primary"> <span class="oi oi-media-skip-backward" aria-hidden="true"></span></button>
-                <button class="btn btn-primary" @onclick="moveBackwards"> <span class="oi oi-media-step-backward"
+            @if (gameType == "CV")
+            {
+                <div class="stateMenu">
+                    @* <button class="btn btn-primary"> <span class="oi oi-media-skip-backward"
+                        aria-hidden="true"></span></button>
+                        <button class="btn btn-primary" @onclick="moveBackwards"> <span class="oi oi-media-step-backward"
+                        aria-hidden="true"></span></button> *@
+                    <button class="btn btn-primary" @onclick="moveForward"> <span class="oi oi-media-step-forward"
                     aria-hidden="true"></span></button>
-                <button class="btn btn-primary" @onclick="moveForward"> <span class="oi oi-media-step-forward"
-                    aria-hidden="true"></span></button>
-                <button class="btn btn-primary"> <span class="oi oi-media-skip-forward" aria-hidden="true"></span></button>
-            </div>
+                    @* <button class="btn btn-primary"> <span class="oi oi-media-skip-forward"
+                        aria-hidden="true"></span></button> *@
+                </div>
+            }
         </div>
-        <div class="flex-child">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Move</th>
-                        <th>Whites</th>
-                        <th>Blacks</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @for (int index = 0; index < MovesInNotation.Count - 1; index += 2)
-                    {
+        @if (gameType == "CV")
+        {
+            <div class="flex-child">
+                <table class="table">
+                    <thead>
                         <tr>
-                            <td>@(index / 2).</td>
-                            <td>@MovesInNotation[index]</td>
-                            <td>@MovesInNotation[index + 1]</td>
+                            <th>Move</th>
+                            <th>Whites</th>
+                            <th>Blacks</th>
                         </tr>
-                    }
-                </tbody>
-            </table>
-            <div class="center">
-                <button class="btn btn-primary" @onclick="DownloadFile">Download PGN File</button>
+                    </thead>
+                    <tbody>
+                        @for (int index = 0; index < MovesInNotation.Count - 1; index += 2)
+                        {
+                            <tr>
+                                <td>@(index / 2).</td>
+                                <td>@MovesInNotation[index]</td>
+                                <td>@MovesInNotation[index + 1]</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div class="center">
+                    <button class="btn btn-primary" @onclick="DownloadFile">Download PGN File</button>
+                </div>
             </div>
-        </div>
+        }
     </div>
 }
 
@@ -170,13 +185,17 @@ else
 
     [Parameter]
     public string gameId { get; set; }
+    [Parameter]
+    public string gameType { get; set; }
 
     private CancellationTokenSource disposalTokenSource = new CancellationTokenSource();
     private ClientWebSocket webSocket = new ClientWebSocket();
-    private  string message = "Hello, websocket!";
+    private string message = "Hello, websocket!";
     private string log = "";
     protected override async Task OnInitializedAsync()
     {
+        gameId = gameId ?? "Not provided";
+        gameType = gameType ?? "CV";
         gameBoard = await GameStateService.GetPieceData();
         moveCounter = 0;
         Move[] moves = new Move[]
@@ -197,7 +216,6 @@ else
         await webSocket.ConnectAsync(new Uri("wss://echo.websocket.org"), disposalTokenSource.Token);
         _ = ReceiveLoop();
     }
-
 
     public void moveForward()
     {

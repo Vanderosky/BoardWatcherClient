@@ -19,6 +19,7 @@ namespace BoardWatcherClient
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
             builder.Services.AddSingleton<ChessGameStateService>();
+            builder.Services.AddSingleton<RoutingService>();
     
             await builder.Build().RunAsync();
         }
