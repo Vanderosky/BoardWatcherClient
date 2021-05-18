@@ -1,6 +1,7 @@
 @layout GameFinderLayout
 @page "/"
 @inject NavigationManager NavigationManager
+@inject RoutingService RoutingService
 
 <div class="cotainer">
     <div class="row justify-content-center">
@@ -34,6 +35,7 @@
 
     private void HandleValidSubmit()
     {
-        NavigationManager.NavigateTo("chess/" + gameInputModel.Id);
+        RoutingService.setGameId(Int32.Parse(gameInputModel.Id));
+        NavigationManager.NavigateTo("chess/CV/" + gameInputModel.Id);
     }
 }
