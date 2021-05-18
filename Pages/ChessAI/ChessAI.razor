@@ -1,0 +1,219 @@
+@page "/chess/AI/{gameId?}"
+
+@using BoardWatcherClient
+@inject ChessGameStateService GameStateService
+@inject IJSRuntime JSRuntime
+
+@if (gameId != null)
+{
+    <div class="center">
+        <h1>Running in AI Mode, Game ID: @gameId</h1>
+    </div>
+}
+@if (gameBoard == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="flex-container">
+        <div class="flex-child center">
+            <table class="chess-board">
+                <tbody>
+                    <tr>
+                        <th></th>
+                        <th>a</th>
+                        <th>b</th>
+                        <th>c</th>
+                        <th>d</th>
+                        <th>e</th>
+                        <th>f</th>
+                        <th>g</th>
+                        <th>h</th>
+                    </tr>
+
+                    <tr>
+                        <th>8</th>
+                        @for (var i = 0; i < 8; i++)
+                        {
+                            if (i % 2 == 0)
+                            {
+                                <td class="light">@GetPiece(gameBoard[0 + i])</td } else { <td class="dark">@GetPiece(gameBoard[1 +
+                    i])</td>
+                            }
+                        }
+                    </tr>
+                    <tr>
+                        <th>7</th>
+                        @for (var i = 0; i < 8; i++)
+                        {
+                            if (i % 2 == 0)
+                            {
+                                <td class="dark">@GetPiece(gameBoard[8 + i])</td } else { <td class="light">@GetPiece(gameBoard[9 +
+                    i])</td>
+                            }
+                        }
+                    </tr>
+                    <tr>
+                        <th>6</th>
+                        @for (var i = 0; i < 8; i++)
+                        {
+                            if (i % 2 == 0)
+                            {
+                                <td class="light">@GetPiece(gameBoard[16 + i])</td } else { <td class="dark">@GetPiece(gameBoard[17
+                    + i])</td>
+                            }
+                        }
+                    </tr>
+                    <tr>
+                        <th>5</th>
+                        @for (var i = 0; i < 8; i++)
+                        {
+                            if (i % 2 == 0)
+                            {
+                                <td class="dark">@GetPiece(gameBoard[24 + i])</td } else { <td class="light">@GetPiece(gameBoard[25
+                    + i])</td>
+                            }
+                        }
+                    </tr>
+                    <tr>
+                        <th>4</th>
+                        @for (var i = 0; i < 8; i++)
+                        {
+                            if (i % 2 == 0)
+                            {
+                                <td class="light">@GetPiece(gameBoard[32 + i])</td } else { <td class="dark">@GetPiece(gameBoard[33
+                    + i])</td>
+                            }
+                        }
+                    </tr>
+                    <tr>
+                        <th>3</th>
+                        @for (var i = 0; i < 8; i++)
+                        {
+                            if (i % 2 == 0)
+                            {
+                                <td class="dark">@GetPiece(gameBoard[40 + i])</td } else { <td class="light">@GetPiece(gameBoard[41
+                    + i])</td>
+                            }
+                        }
+                    </tr>
+                    <tr>
+                        <th>2</th>
+                        @for (var i = 0; i < 8; i++)
+                        {
+                            if (i % 2 == 0)
+                            {
+                                <td class="light">@GetPiece(gameBoard[48 + i])</td } else { <td class="dark">@GetPiece(gameBoard[49
+                    + i])</td>
+                            }
+                        }
+                    </tr>
+                    <tr>
+                        <th>1</th>
+                        @for (var i = 0; i < 8; i++)
+                        {
+                            if (i % 2 == 0)
+                            {
+                                <td class="dark">@GetPiece(gameBoard[56 + i])</td } else { <td class="light">@GetPiece(gameBoard[57
+                    + i])</td>
+                            }
+                        }
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+
+@code {
+    private PieceCV[] gameBoard;
+    private List<string> MovesInNotation = new List<string>();
+
+    [Parameter]
+    public string gameId { get; set; }
+    [Parameter]
+    public string gameType { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        gameId = gameId ?? "Not provided";
+        gameType = gameType ?? "CV";
+        gameBoard = await GameStateService.GetPieceData();
+        Move[] moves = new Move[]
+        {
+            new Move(1 ,48, 40),
+            new Move(1, 9, 17),
+            new Move(1, 50, 42),
+            new Move(4, 2, 16),
+            new Move(3 ,62, 47),
+            new Move(4, 16, 52),
+            new Move(4, 61, 52)
+        };
+    }
+
+    public string getPieceName(int pieceId)
+    {
+        switch (pieceId)
+        {
+            case 0:
+                return "";
+            case 1:
+                return ""; // pawn
+            case 2:
+                return "R"; // rook
+            case 3:
+                return "N"; // knight
+            case 4:
+                return "B"; // bishop
+            case 5:
+                return "Q"; // queen
+            case 6:
+                return "K"; // king
+        }
+        return "";
+    }
+
+    public string GetPiece(PieceCV piece)
+    {
+        if (piece.Color)
+        {
+            switch (piece.Id)
+            {
+                case 1:
+                    return "♙";
+                case 2:
+                    return "♖";
+                case 3:
+                    return "♘";
+                case 4:
+                    return "♗";
+                case 5:
+                    return "♕";
+                case 6:
+                    return "♔";
+                default:
+                    return "";
+            }
+        }
+        else
+        {
+            switch (piece.Id)
+            {
+                case 1:
+                    return "♟";
+                case 2:
+                    return "♜";
+                case 3:
+                    return "♞";
+                case 4:
+                    return "♝";
+                case 5:
+                    return "♛";
+                case 6:
+                    return "♚";
+                default:
+                    return "";
+            }
+        }
+    }
+}
