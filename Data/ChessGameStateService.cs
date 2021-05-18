@@ -1,6 +1,9 @@
 using System.Linq;
 using System.Threading.Tasks;
 using System.Net.WebSockets;
+using System.Threading;
+using System;
+using System.Text;
 
 namespace BoardWatcherClient
 {
@@ -67,52 +70,52 @@ namespace BoardWatcherClient
 
         public PieceCV[] getPieceDataFromJson()
         {
-           return System.Text.Json.JsonSerializer.Deserialize<PieceCV[]>("/piecesTest.json");
+            return System.Text.Json.JsonSerializer.Deserialize<PieceCV[]>("/piecesTest.json");
         }
 
-    public string GetPiece(int tileId)
-    {
-        PieceCV tmpPiece = this.gameState.Board[tileId];
-        if (tmpPiece.Color)
+        public string GetPiece(int tileId)
         {
-            switch (tmpPiece.Id)
+            PieceCV tmpPiece = this.gameState.Board[tileId];
+            if (tmpPiece.Color)
             {
-                case 1:
-                    return "♟";
-                case 2:
-                    return "♜";
-                case 3:
-                    return "♞";
-                case 4:
-                    return "♝";
-                case 5:
-                    return "♛";
-                case 6:
-                    return "♚";
-                default:
-                    return "";
+                switch (tmpPiece.Id)
+                {
+                    case 1:
+                        return "♟";
+                    case 2:
+                        return "♜";
+                    case 3:
+                        return "♞";
+                    case 4:
+                        return "♝";
+                    case 5:
+                        return "♛";
+                    case 6:
+                        return "♚";
+                    default:
+                        return "";
+                }
             }
-        }
-        else
-        {
-            switch (tmpPiece.Id)
+            else
             {
-                case 1:
-                    return "♙";
-                case 2:
-                    return "♖";
-                case 3:
-                    return "♘";
-                case 4:
-                    return "♗";
-                case 5:
-                    return "♕";
-                case 6:
-                    return "♔";
-                default:
-                    return "";
+                switch (tmpPiece.Id)
+                {
+                    case 1:
+                        return "♙";
+                    case 2:
+                        return "♖";
+                    case 3:
+                        return "♘";
+                    case 4:
+                        return "♗";
+                    case 5:
+                        return "♕";
+                    case 6:
+                        return "♔";
+                    default:
+                        return "";
+                }
             }
         }
     }
-}
 }
