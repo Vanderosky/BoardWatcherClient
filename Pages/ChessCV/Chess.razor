@@ -187,16 +187,6 @@ else
         gameId = gameId ?? "Not provided";
         gameBoard = await GameStateService.GetPieceData();
         moveCounter = 0;
-        List<Move> moves =new List<Move>{
-            new Move(1 ,48, 40, true),
-            new Move(1, 9, 17, true),
-            new Move(1, 50, 42, true),
-            new Move(4, 2, 16, true),
-            new Move(3 ,62, 47, true),
-            new Move(4, 16, 52, true),
-            new Move(4, 61, 52, true)
-        };
-        MovesHistory = moves;
         await webSocket.ConnectAsync(new Uri("wss://sleepy-falls-41701.herokuapp.com/watch?id=a"), disposalTokenSource.Token);
         _ = ReceiveLoop();
         _ = sendLoop();
@@ -248,6 +238,7 @@ else
             var receivedAsText = Encoding.UTF8.GetString(buffer.Array, 0, received.Count);
             serverResponse = JsonConvert.DeserializeObject<Move>(receivedAsText);
             MovesHistory.Add(serverResponse);
+            Console.WriteLine(receivedAsText);
             updateMovesInNotatioin();
             StateHasChanged();
         }
