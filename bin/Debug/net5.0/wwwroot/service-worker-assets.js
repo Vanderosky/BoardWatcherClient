@@ -1,7 +1,7 @@
 ﻿self.assetsManifest = {
   "assets": [
     {
-      "hash": "sha256-bVXcijppUPRQR3vFLDkpu\/cblVO575b\/rqqJ9Jmout8=",
+      "hash": "sha256-FR2pQL8D6sVOXndOcimgxh90ja6eYjCLDn0bfFIgFEU=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -91,6 +91,10 @@
     {
       "hash": "sha256-YlYt1zT1hT+aqQZN29dDxRiK4W\/IlVEC3wpLUTx9jtY=",
       "url": "_framework\/Microsoft.JSInterop.WebAssembly.dll"
+    },
+    {
+      "hash": "sha256-cs8pHUurDt0IqbB8YXPh560au3q3J\/1wRL9jBddRVmE=",
+      "url": "_framework\/Newtonsoft.Json.dll"
     },
     {
       "hash": "sha256-3ET+mpR7F058YRj9YaLHOVXBqOW6iUxtIpeiKPYw4PA=",
@@ -785,11 +789,11 @@
       "url": "_framework\/dotnet.5.0.4.js"
     },
     {
-      "hash": "sha256-X\/qVJp0La1o6sUSzcEzXmapOk3P7n6Vx3LlAmp++U3c=",
+      "hash": "sha256-dhy46PXJoRIlxm0PL5WJ9yOeewNRHnjY6BB+EmQskzg=",
       "url": "_framework\/BoardWatcherClient.dll"
     },
     {
-      "hash": "sha256-Te9Yakc8zH2xvZ1VyPwKS4NPHjIXMmoyxUFAjm4LxqE=",
+      "hash": "sha256-xsI+J7ozZ5+dJS7gQdNvXy3h9MpsqRUHNCLutA7NCTQ=",
       "url": "_framework\/BoardWatcherClient.pdb"
     },
     {
@@ -883,6 +887,10 @@
     {
       "hash": "sha256-PK8ybzyPAMD9UBrd7jKOQdl4MBd2npyCFVQ21SGTHLQ=",
       "url": "_framework\/Microsoft.JSInterop.WebAssembly.dll.gz"
+    },
+    {
+      "hash": "sha256-NC8CJsUgrE5xQNKmxdKZAHgu8r+RqoWbNar2oWWdSD4=",
+      "url": "_framework\/Newtonsoft.Json.dll.gz"
     },
     {
       "hash": "sha256-vwjAF20lq+yxKjnFSGOsijXJ8WtpR4ChadUq9n06oVc=",
@@ -1645,13 +1653,13 @@
       "url": "sample-data\/weather.json"
     },
     {
-      "hash": "sha256-zw5Vk7zq4YDA0IaZi8K86qtHglUOpGyaDYPUldIlrWM=",
+      "hash": "sha256-0fMlb01\/NaTYAEazZFQ\/Pro6HNI3Gy894fu9aXW0Tl4=",
       "url": "BoardWatcherClient.styles.css"
     },
     {
-      "hash": "sha256-QDSmFdylKknygeY4gdCoyhzlxIN88wguYeOCmN+rTq8=",
+      "hash": "sha256-RfQjOcCMYxNRKEn6uRrWjH\/xm+zpNwDvaER+PhjBGII=",
       "url": "BoardWatcherClient.bundle.scp.css"
     }
   ],
-  "version": "oiORbr1x"
+  "version": "qg0QoQYx"
 };
