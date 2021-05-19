@@ -5,6 +5,9 @@
 @inject IJSRuntime JSRuntime
 @using System.Text
 @using System.Threading
+@using System.Net.WebSockets
+@implements IDisposable
+@using Newtonsoft.Json
 
 @if (gameId != null)
 {
@@ -12,9 +15,9 @@
         <h1>Running in OpenCV Mode, Game ID: @gameId</h1>
     </div>
 }
-@if (gameBoard == null)
+@if (disposalTokenSource.IsCancellationRequested)
 {
-    <p><em>Loading...</em></p>
+    <p><em>Connecting...</em></p>
 }
 else
 {
@@ -138,106 +141,134 @@ else
                 </div>
             }
         </div>
-            <div class="flex-child">
-                <table class="table">
-                    <thead>
+        <div class="flex-child">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Move</th>
+                        <th>Whites</th>
+                        <th>Blacks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int index = 0; index < MovesInNotation.Count - 1; index += 2)
+                    {
                         <tr>
-                            <th>Move</th>
-                            <th>Whites</th>
-                            <th>Blacks</th>
+                            <td>@(index / 2).</td>
+                            <td>@MovesInNotation[index]</td>
+                            <td>@MovesInNotation[index + 1]</td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @for (int index = 0; index < MovesInNotation.Count - 1; index += 2)
-                        {
-                            <tr>
-                                <td>@(index / 2).</td>
-                                <td>@MovesInNotation[index]</td>
-                                <td>@MovesInNotation[index + 1]</td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-                <div class="center">
-                    <button class="btn btn-primary" @onclick="DownloadFile">Download PGN File</button>
-                </div>
+                    }
+                </tbody>
+            </table>
+            <div class="center">
+                <button class="btn btn-primary" @onclick="DownloadFile">Download PGN File</button>
             </div>
+        </div>
     </div>
 }
 
 @code {
     private PieceCV[] gameBoard;
-    private Move[] MovesHistory;
+    private List<Move> MovesHistory = new List<Move>();
     private List<string> MovesInNotation = new List<string>();
     private int moveCounter;
+    private CancellationTokenSource disposalTokenSource = new CancellationTokenSource();
+    private ClientWebSocket webSocket = new ClientWebSocket();
+    private string message = "Hello, websocket!";
 
     [Parameter]
     public string gameId { get; set; }
     [Parameter]
     public string gameType { get; set; }
 
-    private CancellationTokenSource disposalTokenSource = new CancellationTokenSource();
     protected override async Task OnInitializedAsync()
     {
         gameId = gameId ?? "Not provided";
         gameBoard = await GameStateService.GetPieceData();
         moveCounter = 0;
-        Move[] moves = new Move[]
-        {
-            new Move(1 ,48, 40),
-            new Move(1, 9, 17),
-            new Move(1, 50, 42),
-            new Move(4, 2, 16),
-            new Move(3 ,62, 47),
-            new Move(4, 16, 52),
-            new Move(4, 61, 52)
+        List<Move> moves =new List<Move>{
+            new Move(1 ,48, 40, true),
+            new Move(1, 9, 17, true),
+            new Move(1, 50, 42, true),
+            new Move(4, 2, 16, true),
+            new Move(3 ,62, 47, true),
+            new Move(4, 16, 52, true),
+            new Move(4, 61, 52, true)
         };
         MovesHistory = moves;
+        await webSocket.ConnectAsync(new Uri("wss://sleepy-falls-41701.herokuapp.com/watch?id=a"), disposalTokenSource.Token);
+        _ = ReceiveLoop();
+        _ = sendLoop();
+        updateMovesInNotatioin();
+    }
+
+    public void updateMovesInNotatioin()
+    {
+        List<string> movesInNotation = new List<string>();
         foreach (Move move in MovesHistory)
         {
-            MovesInNotation.Add(getMoveInNotation(move));
+            movesInNotation.Add(getMoveInNotation(move));
         }
+        MovesInNotation = movesInNotation;
     }
 
     public void moveForward()
     {
-        if (moveCounter < MovesHistory.Length)
+        if (moveCounter < MovesHistory.Count)
         {
             Move currentMove = MovesHistory[moveCounter];
-            this.gameBoard[currentMove.toField] = this.gameBoard[currentMove.fromField];
-            this.gameBoard[currentMove.fromField] = getClearField();
-            if (moveCounter < MovesHistory.Length) moveCounter++;
+            this.gameBoard[currentMove.to] = this.gameBoard[currentMove.from];
+            this.gameBoard[currentMove.from] = getClearField();
+            if (moveCounter < MovesHistory.Count) moveCounter++;
         }
     }
-    public void moveBackwards()
-    {
-        if (moveCounter > 0) moveCounter--;
-    }
-    public void moveFastForward()
-    {
-        moveCounter = MovesHistory.Length;
-    }
-
-    public void moveFastBackwards()
-    {
-        moveCounter = 0;
-    }
-
     public PieceCV getClearField()
     {
         return new PieceCV(0, false);
     }
 
+    async Task sendLoop()
+    {
+        var dataToSend = new ArraySegment<byte>(Encoding.UTF8.GetBytes(message));
+        while (!disposalTokenSource.IsCancellationRequested)
+        {
+            await Task.Delay(59000);
+            await webSocket.SendAsync(dataToSend, WebSocketMessageType.Text, true, disposalTokenSource.Token);
+        }
+    }
+
+    async Task ReceiveLoop()
+    {
+        var buffer = new ArraySegment<byte>(new byte[1024]);
+        Move serverResponse;
+        while (!disposalTokenSource.IsCancellationRequested)
+        {
+            var received = await webSocket.ReceiveAsync(buffer, disposalTokenSource.Token);
+            var receivedAsText = Encoding.UTF8.GetString(buffer.Array, 0, received.Count);
+            serverResponse = JsonConvert.DeserializeObject<Move>(receivedAsText);
+            MovesHistory.Add(serverResponse);
+            updateMovesInNotatioin();
+            StateHasChanged();
+        }
+    }
+
+    public void Dispose()
+    {
+        disposalTokenSource.Cancel();
+        _ = webSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Bye", CancellationToken.None);
+    }
+
     public string getMoveInNotation(Move move)
     {
         string fieldName = "";
-        fieldName += getPieceName(move.pieceId);
-        if (gameBoard[move.toField].Id != 0) // check if capture
+        fieldName += getPieceName(move.piece);
+        if (gameBoard[move.to].Id != 0) // check if capture
         {
             fieldName += "x";
         }
-        fieldName += ((char)(move.toField % 8 + 97));
-        fieldName += (8 - move.toField / 8).ToString();
+        fieldName += ((char)(move.to % 8 + 97));
+        fieldName += (8 - move.to / 8).ToString();
         return fieldName;
     }
 

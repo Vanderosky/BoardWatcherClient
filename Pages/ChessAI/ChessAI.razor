@@ -140,13 +140,13 @@ else
         gameBoard = await GameStateService.GetPieceData();
         Move[] moves = new Move[]
         {
-            new Move(1 ,48, 40),
-            new Move(1, 9, 17),
-            new Move(1, 50, 42),
-            new Move(4, 2, 16),
-            new Move(3 ,62, 47),
-            new Move(4, 16, 52),
-            new Move(4, 61, 52)
+            new Move(1 ,48, 40, true),
+            new Move(1, 9, 17, true),
+            new Move(1, 50, 42, true),
+            new Move(4, 2, 16, true),
+            new Move(3 ,62, 47, true),
+            new Move(4, 16, 52, true),
+            new Move(4, 61, 52, true)
         };
     }
 

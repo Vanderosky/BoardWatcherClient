@@ -2,16 +2,17 @@ namespace BoardWatcherClient
 {
     public class Move
     {
-        public Move(int pieceId, int fromField, int toField)
+        public Move(int pieceId, int from, int to, bool color)
         {
-            this.pieceId = pieceId;
-            this.fromField = fromField;
-            this.toField = toField;
+            this.piece = pieceId;
+            this.from = from;
+            this.to = to;
+            this.color = color;
         }
 
-        public int pieceId { get; set; }
-        public int fromField { get; set; }
-
-        public int toField { get; set; }
+        public int piece { get; set; }
+        public int from { get; set; }
+        public int to { get; set; }
+        public bool color { get; set; }
     }
 }
