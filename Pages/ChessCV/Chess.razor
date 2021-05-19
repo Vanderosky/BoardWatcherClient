@@ -237,11 +237,19 @@ else
             var received = await webSocket.ReceiveAsync(buffer, disposalTokenSource.Token);
             var receivedAsText = Encoding.UTF8.GetString(buffer.Array, 0, received.Count);
             serverResponse = JsonConvert.DeserializeObject<Move>(receivedAsText);
-            MovesHistory.Add(serverResponse);
             Console.WriteLine(receivedAsText);
-            updateMovesInNotatioin();
+            AddMove(serverResponse);
             StateHasChanged();
         }
+    }
+
+    public void AddMove(Move move)
+    {
+            MovesHistory.Add(move);
+            updateMovesInNotatioin();
+            if (moveCounter == MovesHistory.Count - 1) {
+                moveForward();
+            }
     }
 
     public void Dispose()
