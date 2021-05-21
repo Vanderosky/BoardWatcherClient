@@ -60,7 +60,7 @@
                             {
                                 if (i % 2 == 0)
                                 {
-                                    <td class="light">@GetPiece(gameBoard[0 + i])</td } else { <td class="dark">@GetPiece(gameBoard[1 +
+                                    <td class="light">@GetPiece(gameBoards[moveCounter][0 + i])</td } else { <td class="dark">@GetPiece(gameBoards[moveCounter][1 +
                     i])</td>
                                 }
                             }
@@ -71,7 +71,7 @@
                             {
                                 if (i % 2 == 0)
                                 {
-                                    <td class="dark">@GetPiece(gameBoard[8 + i])</td } else { <td class="light">@GetPiece(gameBoard[9 +
+                                    <td class="dark">@GetPiece(gameBoards[moveCounter][8 + i])</td } else { <td class="light">@GetPiece(gameBoards[moveCounter][9 +
                     i])</td>
                                 }
                             }
@@ -82,7 +82,7 @@
                             {
                                 if (i % 2 == 0)
                                 {
-                                    <td class="light">@GetPiece(gameBoard[16 + i])</td } else { <td class="dark">@GetPiece(gameBoard[17
+                                    <td class="light">@GetPiece(gameBoards[moveCounter][16 + i])</td } else { <td class="dark">@GetPiece(gameBoards[moveCounter][17
                     + i])</td>
                                 }
                             }
@@ -93,7 +93,7 @@
                             {
                                 if (i % 2 == 0)
                                 {
-                                    <td class="dark">@GetPiece(gameBoard[24 + i])</td } else { <td class="light">@GetPiece(gameBoard[25
+                                    <td class="dark">@GetPiece(gameBoards[moveCounter][24 + i])</td } else { <td class="light">@GetPiece(gameBoards[moveCounter][25
                     + i])</td>
                                 }
                             }
@@ -104,7 +104,7 @@
                             {
                                 if (i % 2 == 0)
                                 {
-                                    <td class="light">@GetPiece(gameBoard[32 + i])</td } else { <td class="dark">@GetPiece(gameBoard[33
+                                    <td class="light">@GetPiece(gameBoards[moveCounter][32 + i])</td } else { <td class="dark">@GetPiece(gameBoards[moveCounter][33
                     + i])</td>
                                 }
                             }
@@ -115,7 +115,7 @@
                             {
                                 if (i % 2 == 0)
                                 {
-                                    <td class="dark">@GetPiece(gameBoard[40 + i])</td } else { <td class="light">@GetPiece(gameBoard[41
+                                    <td class="dark">@GetPiece(gameBoards[moveCounter][40 + i])</td } else { <td class="light">@GetPiece(gameBoards[moveCounter][41
                     + i])</td>
                                 }
                             }
@@ -126,7 +126,7 @@
                             {
                                 if (i % 2 == 0)
                                 {
-                                    <td class="light">@GetPiece(gameBoard[48 + i])</td } else { <td class="dark">@GetPiece(gameBoard[49
+                                    <td class="light">@GetPiece(gameBoards[moveCounter][48 + i])</td } else { <td class="dark">@GetPiece(gameBoards[moveCounter][49
                     + i])</td>
                                 }
                             }
@@ -137,7 +137,7 @@
                             {
                                 if (i % 2 == 0)
                                 {
-                                    <td class="dark">@GetPiece(gameBoard[56 + i])</td } else { <td class="light">@GetPiece(gameBoard[57
+                                    <td class="dark">@GetPiece(gameBoards[moveCounter][56 + i])</td } else { <td class="light">@GetPiece(gameBoards[moveCounter][57
                     + i])</td>
                                 }
                             }
@@ -147,14 +147,14 @@
                 @if (gameType == "CV")
                 {
                     <div class="stateMenu">
-                        @* <button class="btn btn-primary"> <span class="oi oi-media-skip-backward"
+                        <button class="btn btn-primary"  @onclick="skipBackwards"> <span class="oi oi-media-skip-backward"
                             aria-hidden="true"></span></button>
                             <button class="btn btn-primary" @onclick="moveBackwards"> <span class="oi oi-media-step-backward"
-                            aria-hidden="true"></span></button> *@
+                            aria-hidden="true"></span></button>
                         <button class="btn btn-primary" @onclick="moveForward"> <span class="oi oi-media-step-forward"
                     aria-hidden="true"></span></button>
-                        @* <button class="btn btn-primary"> <span class="oi oi-media-skip-forward"
-                            aria-hidden="true"></span></button> *@
+                        <button class="btn btn-primary" @onclick="skipForward"> <span class="oi oi-media-skip-forward"
+                            aria-hidden="true"></span></button>
                     </div>
                 }
             </div>
@@ -163,8 +163,8 @@
                     <thead>
                         <tr>
                             <th>Move</th>
-                            <th>Whites</th>
-                            <th>Blacks</th>
+                            <th>White</th>
+                            <th>Black</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -188,11 +188,10 @@
 
 
 @code {
-    private List<PieceCV> gameBoard;
+    private List<List<PieceCV>> gameBoards = new List<List<PieceCV>>();
     private List<Move> MovesHistory = new List<Move>();
     private List<string> MovesInNotation = new List<string>();
     private int moveCounter;
-    private int connected = 2;
     private CancellationTokenSource disposalTokenSource = new CancellationTokenSource();
     private ClientWebSocket webSocket = new ClientWebSocket();
     private string message = "Hello, websocket!";
@@ -205,20 +204,16 @@
     protected override async Task OnInitializedAsync()
     {
         gameId = gameId ?? "Not provided";
-        gameBoard = await GameStateService.GetPieceData();
+        gameBoards.Add(await GameStateService.GetPieceData());
         moveCounter = 0;
         try
         {
             string watchUrl = "wss://sleepy-falls-41701.herokuapp.com/watch?id=" + gameId;
             await webSocket.ConnectAsync(new Uri(watchUrl), disposalTokenSource.Token);
-            connected = 1;
             _ = ReceiveLoop();
             _ = sendLoop();
         }
-        catch (Exception ex)
-        {
-            connected = 0;
-        }
+        catch (Exception ex){ }
         updateMovesInNotatioin();
     }
 
@@ -232,15 +227,24 @@
         MovesInNotation = movesInNotation;
     }
 
+    public void moveBackwards()
+    {
+        if (moveCounter > 0) moveCounter--;
+        Console.WriteLine(moveCounter);
+    }
     public void moveForward()
     {
-        if (moveCounter < MovesHistory.Count)
-        {
-            Move currentMove = MovesHistory[moveCounter];
-            this.gameBoard[currentMove.to] = this.gameBoard[currentMove.from];
-            this.gameBoard[currentMove.from] = getClearField();
-            if (moveCounter < MovesHistory.Count) moveCounter++;
-        }
+        if (moveCounter < MovesHistory.Count) moveCounter++;
+    }
+
+    public void skipBackwards()
+    {
+        moveCounter = 0;
+    }
+
+    public void skipForward()
+    {
+        moveCounter = gameBoards.Count - 1;
     }
     public PieceCV getClearField()
     {
@@ -253,7 +257,7 @@
         while (webSocket.State == WebSocketState.Open)
         {
             await webSocket.SendAsync(dataToSend, WebSocketMessageType.Text, true, disposalTokenSource.Token);
-            Console.WriteLine("sent to server to keep connection open", dataToSend);
+            @* Console.WriteLine("sent to server to keep connection open"); *@
             await Task.Delay(30000);
         }
     }
@@ -267,7 +271,7 @@
             var received = await webSocket.ReceiveAsync(buffer, disposalTokenSource.Token);
             var receivedAsText = Encoding.UTF8.GetString(buffer.Array, 0, received.Count);
             serverResponse = JsonConvert.DeserializeObject<Move>(receivedAsText);
-            Console.WriteLine(receivedAsText);
+            @* Console.WriteLine(receivedAsText); *@
             AddMove(serverResponse);
             StateHasChanged();
         }
@@ -276,6 +280,10 @@
     public void AddMove(Move move)
     {
         MovesHistory.Add(move);
+        List<PieceCV> tmpGameBoard = new List<PieceCV>(this.gameBoards[moveCounter]);
+        tmpGameBoard[move.to] = tmpGameBoard[move.from];
+        tmpGameBoard[move.from] = getClearField();
+        this.gameBoards.Add(tmpGameBoard);
         updateMovesInNotatioin();
         if (moveCounter == MovesHistory.Count - 1)
         {
@@ -293,7 +301,7 @@
     {
         string fieldName = "";
         fieldName += getPieceName(move.piece);
-        if (gameBoard[move.to].Id != 0) // check if capture
+        if (gameBoards[moveCounter][move.to].Id != 0) // check if capture
         {
             fieldName += "x";
         }
