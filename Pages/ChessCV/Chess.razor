@@ -252,7 +252,7 @@
         var dataToSend = new ArraySegment<byte>(Encoding.UTF8.GetBytes(message));
         while (webSocket.State == WebSocketState.Open)
         {
-            @* await webSocket.SendAsync(dataToSend, WebSocketMessageType.Text, true, disposalTokenSource.Token); *@
+            await webSocket.SendAsync(dataToSend, WebSocketMessageType.Text, true, disposalTokenSource.Token);
             Console.WriteLine("sent to server to keep connection open", dataToSend);
             await Task.Delay(30000);
         }
