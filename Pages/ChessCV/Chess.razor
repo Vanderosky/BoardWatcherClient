@@ -9,19 +9,27 @@
 @implements IDisposable
 @using Newtonsoft.Json
 
-@if (connected == 2)
+
+<h1>@webSocket.State</h1>
+@if (webSocket.State == WebSocketState.Connecting || webSocket.State == WebSocketState.None)
 {
     <div class="center">
         <h1>Connecting to the game: @gameId</h1>
     </div>
 }
-@if (connected == 0)
+@if (webSocket.State == WebSocketState.Closed)
 {
     <div class="center">
         <h1>Couldn't find game with game ID: @gameId</h1>
     </div>
 }
-@if (connected == 1)
+@if (webSocket.State == WebSocketState.CloseReceived || webSocket.State == WebSocketState.CloseSent)
+{
+    <div class="center">
+        <h1>Lost connection with game: @gameId, try to reconnect again</h1>
+    </div>
+}
+@if (webSocket.State == WebSocketState.Open)
 {
     @if (gameId != null)
     {
@@ -180,7 +188,7 @@
 
 
 @code {
-    private PieceCV[] gameBoard;
+    private List<PieceCV> gameBoard;
     private List<Move> MovesHistory = new List<Move>();
     private List<string> MovesInNotation = new List<string>();
     private int moveCounter;
@@ -242,10 +250,11 @@
     async Task sendLoop()
     {
         var dataToSend = new ArraySegment<byte>(Encoding.UTF8.GetBytes(message));
-        while (!disposalTokenSource.IsCancellationRequested)
+        while (webSocket.State == WebSocketState.Open)
         {
-            await Task.Delay(59000);
-            await webSocket.SendAsync(dataToSend, WebSocketMessageType.Text, true, disposalTokenSource.Token);
+            @* await webSocket.SendAsync(dataToSend, WebSocketMessageType.Text, true, disposalTokenSource.Token); *@
+            Console.WriteLine("sent to server to keep connection open", dataToSend);
+            await Task.Delay(30000);
         }
     }
 
@@ -253,7 +262,7 @@
     {
         var buffer = new ArraySegment<byte>(new byte[1024]);
         Move serverResponse;
-        while (!disposalTokenSource.IsCancellationRequested)
+        while (webSocket.State == WebSocketState.Connecting)
         {
             var received = await webSocket.ReceiveAsync(buffer, disposalTokenSource.Token);
             var receivedAsText = Encoding.UTF8.GetString(buffer.Array, 0, received.Count);

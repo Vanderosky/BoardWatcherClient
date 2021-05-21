@@ -4,16 +4,17 @@ using System.Net.WebSockets;
 using System.Threading;
 using System;
 using System.Text;
+using System.Collections.Generic;
 
 namespace BoardWatcherClient
 {
     public class ChessGameStateService
     {
         public ChessGameState gameState = new ChessGameState();
-        public PieceCV[] generateNewBoard()
+        public List<PieceCV> generateNewBoard()
         {
-            PieceCV[] pieces = new PieceCV[64];
-            PieceCV[] blackPieces = new PieceCV[]
+            List<PieceCV> pieces = new List<PieceCV>();
+            List<PieceCV> blackPieces = new List<PieceCV>
             {
                 new PieceCV(2, false),
                 new PieceCV(3, false),
@@ -33,7 +34,7 @@ namespace BoardWatcherClient
                 new PieceCV(1, false),
                 new PieceCV(1, false)
             };
-            PieceCV[] whitePieces = new PieceCV[]
+            List<PieceCV> whitePieces = new List<PieceCV>
             {
                 new PieceCV(1, true),
                 new PieceCV(1, true),
@@ -53,19 +54,19 @@ namespace BoardWatcherClient
                 new PieceCV(3, true),
                 new PieceCV(2, true)
             };
-            blackPieces.CopyTo(pieces, 0);
+            pieces.AddRange(blackPieces);
             for (int i = 16; i < 48; i++)
             {
-                pieces[i] = new PieceCV(0, false);
+                pieces.Add(new PieceCV(0, false));
             }
-            whitePieces.CopyTo(pieces, 48);
+            pieces.AddRange(whitePieces);
             return pieces;
         }
-        public Task<PieceCV[]> GetPieceData()
+        public Task<List<PieceCV>> GetPieceData()
         {
-            PieceCV[] pieces = new PieceCV[64];
+            List<PieceCV> pieces = new List<PieceCV>();;
             pieces = generateNewBoard();
-            return Task.FromResult(pieces.ToArray());
+            return Task.FromResult(pieces.ToList());
         }
 
         public PieceCV[] getPieceDataFromJson()
