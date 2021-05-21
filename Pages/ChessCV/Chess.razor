@@ -147,14 +147,14 @@
                 @if (gameType == "CV")
                 {
                     <div class="stateMenu">
-                        @* <button class="btn btn-primary"> <span class="oi oi-media-skip-backward"
+                        <button class="btn btn-primary"  @onclick="skipBackwards"> <span class="oi oi-media-skip-backward"
                             aria-hidden="true"></span></button>
                             <button class="btn btn-primary" @onclick="moveBackwards"> <span class="oi oi-media-step-backward"
-                            aria-hidden="true"></span></button> *@
+                            aria-hidden="true"></span></button>
                         <button class="btn btn-primary" @onclick="moveForward"> <span class="oi oi-media-step-forward"
                     aria-hidden="true"></span></button>
-                        @* <button class="btn btn-primary"> <span class="oi oi-media-skip-forward"
-                            aria-hidden="true"></span></button> *@
+                        <button class="btn btn-primary" @onclick="skipForward"> <span class="oi oi-media-skip-forward"
+                            aria-hidden="true"></span></button>
                     </div>
                 }
             </div>
@@ -227,9 +227,24 @@
         MovesInNotation = movesInNotation;
     }
 
+    public void moveBackwards()
+    {
+        if (moveCounter > 0) moveCounter--;
+        Console.WriteLine(moveCounter);
+    }
     public void moveForward()
     {
         if (moveCounter < MovesHistory.Count) moveCounter++;
+    }
+
+    public void skipBackwards()
+    {
+        moveCounter = 0;
+    }
+
+    public void skipForward()
+    {
+        moveCounter = gameBoards.Count - 1;
     }
     public PieceCV getClearField()
     {
@@ -242,7 +257,7 @@
         while (webSocket.State == WebSocketState.Open)
         {
             await webSocket.SendAsync(dataToSend, WebSocketMessageType.Text, true, disposalTokenSource.Token);
-            Console.WriteLine("sent to server to keep connection open", dataToSend);
+            @* Console.WriteLine("sent to server to keep connection open"); *@
             await Task.Delay(30000);
         }
     }
@@ -256,7 +271,7 @@
             var received = await webSocket.ReceiveAsync(buffer, disposalTokenSource.Token);
             var receivedAsText = Encoding.UTF8.GetString(buffer.Array, 0, received.Count);
             serverResponse = JsonConvert.DeserializeObject<Move>(receivedAsText);
-            Console.WriteLine(receivedAsText);
+            @* Console.WriteLine(receivedAsText); *@
             AddMove(serverResponse);
             StateHasChanged();
         }
@@ -265,10 +280,9 @@
     public void AddMove(Move move)
     {
         MovesHistory.Add(move);
-        Move currentMove = MovesHistory[moveCounter];
-        List<PieceCV> tmpGameBoard = this.gameBoards[moveCounter];
-        tmpGameBoard[currentMove.to] = tmpGameBoard[currentMove.from];
-        tmpGameBoard[currentMove.from] = getClearField();
+        List<PieceCV> tmpGameBoard = new List<PieceCV>(this.gameBoards[moveCounter]);
+        tmpGameBoard[move.to] = tmpGameBoard[move.from];
+        tmpGameBoard[move.from] = getClearField();
         this.gameBoards.Add(tmpGameBoard);
         updateMovesInNotatioin();
         if (moveCounter == MovesHistory.Count - 1)
