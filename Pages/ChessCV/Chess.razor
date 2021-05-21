@@ -9,8 +9,9 @@
 @implements IDisposable
 @using Newtonsoft.Json
 
-
-<h1>@webSocket.State</h1>
+<div>
+    <h5>Connection @webSocket.State</h5>
+</div>
 @if (webSocket.State == WebSocketState.Connecting || webSocket.State == WebSocketState.None)
 {
     <div class="center">
@@ -60,7 +61,8 @@
                             {
                                 if (i % 2 == 0)
                                 {
-                                    <td class="light">@GetPiece(gameBoards[moveCounter][0 + i])</td } else { <td class="dark">@GetPiece(gameBoards[moveCounter][1 +
+                                    <td class="light">@GetPiece(gameBoards[moveCounter][0 + i])</td } else { <td class="dark">
+                                        @GetPiece(gameBoards[moveCounter][1 +
                     i])</td>
                                 }
                             }
@@ -71,7 +73,8 @@
                             {
                                 if (i % 2 == 0)
                                 {
-                                    <td class="dark">@GetPiece(gameBoards[moveCounter][8 + i])</td } else { <td class="light">@GetPiece(gameBoards[moveCounter][9 +
+                                    <td class="dark">@GetPiece(gameBoards[moveCounter][8 + i])</td } else { <td class="light">
+                                        @GetPiece(gameBoards[moveCounter][9 +
                     i])</td>
                                 }
                             }
@@ -82,7 +85,8 @@
                             {
                                 if (i % 2 == 0)
                                 {
-                                    <td class="light">@GetPiece(gameBoards[moveCounter][16 + i])</td } else { <td class="dark">@GetPiece(gameBoards[moveCounter][17
+                                    <td class="light">@GetPiece(gameBoards[moveCounter][16 + i])</td } else { <td class="dark">
+                                        @GetPiece(gameBoards[moveCounter][17
                     + i])</td>
                                 }
                             }
@@ -93,7 +97,8 @@
                             {
                                 if (i % 2 == 0)
                                 {
-                                    <td class="dark">@GetPiece(gameBoards[moveCounter][24 + i])</td } else { <td class="light">@GetPiece(gameBoards[moveCounter][25
+                                    <td class="dark">@GetPiece(gameBoards[moveCounter][24 + i])</td } else { <td class="light">
+                                        @GetPiece(gameBoards[moveCounter][25
                     + i])</td>
                                 }
                             }
@@ -104,7 +109,8 @@
                             {
                                 if (i % 2 == 0)
                                 {
-                                    <td class="light">@GetPiece(gameBoards[moveCounter][32 + i])</td } else { <td class="dark">@GetPiece(gameBoards[moveCounter][33
+                                    <td class="light">@GetPiece(gameBoards[moveCounter][32 + i])</td } else { <td class="dark">
+                                        @GetPiece(gameBoards[moveCounter][33
                     + i])</td>
                                 }
                             }
@@ -115,7 +121,8 @@
                             {
                                 if (i % 2 == 0)
                                 {
-                                    <td class="dark">@GetPiece(gameBoards[moveCounter][40 + i])</td } else { <td class="light">@GetPiece(gameBoards[moveCounter][41
+                                    <td class="dark">@GetPiece(gameBoards[moveCounter][40 + i])</td } else { <td class="light">
+                                        @GetPiece(gameBoards[moveCounter][41
                     + i])</td>
                                 }
                             }
@@ -126,7 +133,8 @@
                             {
                                 if (i % 2 == 0)
                                 {
-                                    <td class="light">@GetPiece(gameBoards[moveCounter][48 + i])</td } else { <td class="dark">@GetPiece(gameBoards[moveCounter][49
+                                    <td class="light">@GetPiece(gameBoards[moveCounter][48 + i])</td } else { <td class="dark">
+                                        @GetPiece(gameBoards[moveCounter][49
                     + i])</td>
                                 }
                             }
@@ -137,7 +145,8 @@
                             {
                                 if (i % 2 == 0)
                                 {
-                                    <td class="dark">@GetPiece(gameBoards[moveCounter][56 + i])</td } else { <td class="light">@GetPiece(gameBoards[moveCounter][57
+                                    <td class="dark">@GetPiece(gameBoards[moveCounter][56 + i])</td } else { <td class="light">
+                                        @GetPiece(gameBoards[moveCounter][57
                     + i])</td>
                                 }
                             }
@@ -147,14 +156,15 @@
                 @if (gameType == "CV")
                 {
                     <div class="stateMenu">
-                        <button class="btn btn-primary"  @onclick="skipBackwards"> <span class="oi oi-media-skip-backward"
-                            aria-hidden="true"></span></button>
-                            <button class="btn btn-primary" @onclick="moveBackwards"> <span class="oi oi-media-step-backward"
-                            aria-hidden="true"></span></button>
+                        <button class="btn btn-primary" @onclick="skipBackwards"> <span class="oi oi-media-skip-backward"
+                    aria-hidden="true"></span></button>
+                        <button class="btn btn-primary" @onclick="moveBackwards"> <span class="oi oi-media-step-backward"
+                    aria-hidden="true"></span></button>
                         <button class="btn btn-primary" @onclick="moveForward"> <span class="oi oi-media-step-forward"
                     aria-hidden="true"></span></button>
                         <button class="btn btn-primary" @onclick="skipForward"> <span class="oi oi-media-skip-forward"
-                            aria-hidden="true"></span></button>
+                    aria-hidden="true"></span></button>
+                    <h8>Last updated at @updateDate</h8>
                     </div>
                 }
             </div>
@@ -195,6 +205,7 @@
     private CancellationTokenSource disposalTokenSource = new CancellationTokenSource();
     private ClientWebSocket webSocket = new ClientWebSocket();
     private string message = "Hello, websocket!";
+    private DateTime updateDate = DateTime.Now;
 
     [Parameter]
     public string gameId { get; set; }
@@ -213,7 +224,7 @@
             _ = ReceiveLoop();
             _ = sendLoop();
         }
-        catch (Exception ex){ }
+        catch (Exception ex) { }
         updateMovesInNotatioin();
     }
 
@@ -230,7 +241,6 @@
     public void moveBackwards()
     {
         if (moveCounter > 0) moveCounter--;
-        Console.WriteLine(moveCounter);
     }
     public void moveForward()
     {
@@ -257,7 +267,7 @@
         while (webSocket.State == WebSocketState.Open)
         {
             await webSocket.SendAsync(dataToSend, WebSocketMessageType.Text, true, disposalTokenSource.Token);
-            @* Console.WriteLine("sent to server to keep connection open"); *@
+            Console.WriteLine("sent to server to keep connection open");
             await Task.Delay(30000);
         }
     }
@@ -271,8 +281,9 @@
             var received = await webSocket.ReceiveAsync(buffer, disposalTokenSource.Token);
             var receivedAsText = Encoding.UTF8.GetString(buffer.Array, 0, received.Count);
             serverResponse = JsonConvert.DeserializeObject<Move>(receivedAsText);
-            @* Console.WriteLine(receivedAsText); *@
+            Console.WriteLine(receivedAsText);
             AddMove(serverResponse);
+            updateDate = DateTime.Now;
             StateHasChanged();
         }
     }
