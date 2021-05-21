@@ -5,19 +5,19 @@ namespace BoardWatcherClient
 {
     public class RoutingService
     {
-        private int gameId;
+        private string gameId;
 
         public RoutingService()
         {
-            gameId = 0;
+            gameId = "0";
         }
 
-        public void setGameId(int id)
+        public void setGameId(string id)
         {
             gameId = id;
         }
 
-        public int getGameId()
+        public string getGameId()
         {
             return gameId;
         }

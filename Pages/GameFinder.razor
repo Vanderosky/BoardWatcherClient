@@ -15,7 +15,7 @@
                                 <DataAnnotationsValidator />
                                 <ValidationSummary />
 
-                                <InputText type="number" class="form-control" required autofocus
+                                <InputText type="text" class="form-control" required autofocus
                                     @bind-Value="gameInputModel.Id" />
 
                                 <button type="submit" class="btn btn-primary">
@@ -35,7 +35,7 @@
 
     private void HandleValidSubmit()
     {
-        RoutingService.setGameId(Int32.Parse(gameInputModel.Id));
+        RoutingService.setGameId(gameInputModel.Id);
         NavigationManager.NavigateTo("chess/CV/" + gameInputModel.Id);
     }
 }
