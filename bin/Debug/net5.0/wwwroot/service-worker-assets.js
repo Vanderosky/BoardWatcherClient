@@ -1,7 +1,7 @@
 ﻿self.assetsManifest = {
   "assets": [
     {
-      "hash": "sha256-adVzdjuGz8Tl0QOJYhODb6XFD\/unWEOL6\/v6aTwF0aM=",
+      "hash": "sha256-lRDgJVX8EoNdit7a4lWnfrUi6yIY\/GjZQ9kX3xfqZM0=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -789,11 +789,11 @@
       "url": "_framework\/dotnet.5.0.4.js"
     },
     {
-      "hash": "sha256-Wi0ZkgkkvyqmFuJYOvgIlBLFboF13+KUnsMhqVcoHDk=",
+      "hash": "sha256-kIgwTUMxgB8GPIXyOUdfrvvAC5QsRSTGLTg\/qmJ7mvU=",
       "url": "_framework\/BoardWatcherClient.dll"
     },
     {
-      "hash": "sha256-qvB8BY2j2uUCC\/jteJlSfruHNp3wRPo1T\/6Ht5V5E7g=",
+      "hash": "sha256-ULlroRNNy9OTqt6hTkjyd9L1RBpYUxSFWqFIHARNcaY=",
       "url": "_framework\/BoardWatcherClient.pdb"
     },
     {
@@ -1661,5 +1661,5 @@
       "url": "BoardWatcherClient.bundle.scp.css"
     }
   ],
-  "version": "Vh696Qcn"
+  "version": "yE\/ZQ+sb"
 };
