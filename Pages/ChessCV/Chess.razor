@@ -187,7 +187,8 @@ else
         gameId = gameId ?? "Not provided";
         gameBoard = await GameStateService.GetPieceData();
         moveCounter = 0;
-        await webSocket.ConnectAsync(new Uri("wss://sleepy-falls-41701.herokuapp.com/watch?id=a"), disposalTokenSource.Token);
+        string watchUrl = "wss://sleepy-falls-41701.herokuapp.com/watch?id=" + gameId;
+        await webSocket.ConnectAsync(new Uri(watchUrl), disposalTokenSource.Token);
         _ = ReceiveLoop();
         _ = sendLoop();
         updateMovesInNotatioin();
