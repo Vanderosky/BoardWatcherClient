@@ -164,7 +164,7 @@
                     aria-hidden="true"></span></button>
                         <button class="btn btn-primary" @onclick="skipForward"> <span class="oi oi-media-skip-forward"
                     aria-hidden="true"></span></button>
-                    <h8>Last updated at @updateDate</h8>
+                        <h8>Last updated at @updateDate.Hour:@updateDate.Minute:@updateDate.Second</h8>
                     </div>
                 }
             </div>
@@ -280,11 +280,27 @@
         {
             var received = await webSocket.ReceiveAsync(buffer, disposalTokenSource.Token);
             var receivedAsText = Encoding.UTF8.GetString(buffer.Array, 0, received.Count);
-            serverResponse = JsonConvert.DeserializeObject<Move>(receivedAsText);
             Console.WriteLine(receivedAsText);
-            AddMove(serverResponse);
+            if (receivedAsText == "REVERT")
+            {
+                RevertLastMove();
+            }
+            else
+            {
+                serverResponse = JsonConvert.DeserializeObject<Move>(receivedAsText);
+                AddMove(serverResponse);
+            }
             updateDate = DateTime.Now;
             StateHasChanged();
+        }
+    }
+
+    public void RevertLastMove()
+    {
+        if (moveCounter > 0) moveCounter--;
+        if (gameBoards.Any())
+        {
+            gameBoards.RemoveAt(gameBoards.Count - 1);
         }
     }
 
