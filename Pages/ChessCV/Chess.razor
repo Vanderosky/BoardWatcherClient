@@ -178,12 +178,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @for (int index = 0; index < MovesInNotation.Count - 1; index += 2)
+                        @for (int index = 0; index < MovesInNotation.Count; index += 2)
                         {
                             <tr>
                                 <td>@(index / 2).</td>
                                 <td>@MovesInNotation[index]</td>
-                                <td>@MovesInNotation[index + 1]</td>
+                                @if (index < MovesInNotation.Count - 1)
+                                {
+                                    <td>@MovesInNotation[index + 1]</td>
+                                }
+                                else
+                                {
+                                    <td></td>
+                                }
                             </tr>
                         }
                     </tbody>
@@ -202,6 +209,7 @@
     private List<Move> MovesHistory = new List<Move>();
     private List<string> MovesInNotation = new List<string>();
     private int moveCounter;
+    private int moveCount = 0;
     private CancellationTokenSource disposalTokenSource = new CancellationTokenSource();
     private ClientWebSocket webSocket = new ClientWebSocket();
     private string message = "Hello, websocket!";
@@ -224,16 +232,31 @@
             _ = ReceiveLoop();
             _ = sendLoop();
         }
-        catch (Exception ex) { }
+        catch (Exception) { }
         updateMovesInNotatioin();
     }
 
     public void updateMovesInNotatioin()
     {
         List<string> movesInNotation = new List<string>();
-        foreach (Move move in MovesHistory)
+        for (int i = 0; i < MovesHistory.Count - 1; i++)
         {
-            movesInNotation.Add(getMoveInNotation(move));
+            if (i > 0)
+            {
+                if (MovesHistory[i - 1].color == MovesHistory[i].color)
+                {
+                    movesInNotation.RemoveAt(movesInNotation.Count - 1);
+                    movesInNotation.Add(getMoveInNotation(MovesHistory[i], true));
+                }
+                else
+                {
+                    movesInNotation.Add(getMoveInNotation(MovesHistory[i]));
+                }
+            }
+            else
+            {
+                movesInNotation.Add(getMoveInNotation(MovesHistory[i]));
+            }
         }
         MovesInNotation = movesInNotation;
     }
@@ -307,11 +330,11 @@
     public void AddMove(Move move)
     {
         MovesHistory.Add(move);
+        updateMovesInNotatioin();
         List<PieceCV> tmpGameBoard = new List<PieceCV>(this.gameBoards[moveCounter]);
         tmpGameBoard[move.to] = tmpGameBoard[move.from];
         tmpGameBoard[move.from] = getClearField();
         this.gameBoards.Add(tmpGameBoard);
-        updateMovesInNotatioin();
         if (moveCounter == MovesHistory.Count - 1)
         {
             moveForward();
@@ -324,9 +347,21 @@
         _ = webSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Bye", CancellationToken.None);
     }
 
-    public string getMoveInNotation(Move move)
+    public string getMoveInNotation(Move move, Boolean castle = false)
     {
         string fieldName = "";
+        if (castle)
+        {
+            fieldName += ((char)(move.to % 8 + 97));
+            fieldName += (8 - move.to / 8).ToString();
+            if (move.piece == 6)
+            {
+                fieldName += " O-O"; //kingside castle
+                return fieldName;
+            }
+            fieldName += " O-O-O"; //quenside castle
+            return fieldName;
+        }
         fieldName += getPieceName(move.piece);
         if (gameBoards[moveCounter][move.to].Id != 0) // check if capture
         {
