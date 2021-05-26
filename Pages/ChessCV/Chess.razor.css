@@ -24,12 +24,23 @@
   border: none;
 }
 
-.chess-board td {
-  width: 1.5em;
-  height: 1.5em;
-  text-align: center;
-  font-size: 3.5em;
-  line-height: 0;
+@media (min-width: 600px) {
+  .chess-board td {
+    width: 1.5em;
+    height: 1.5em;
+    text-align: center;
+    font-size: 3.5em;
+    line-height: 0;
+  }
+}
+@media (max-width: 599px) {
+  .chess-board td {
+    width: 1.5em;
+    height: 1.5em;
+    text-align: center;
+    font-size: 2em;
+    line-height: 0;
+  }
 }
 
 .chess-board .light {

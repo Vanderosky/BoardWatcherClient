@@ -1,7 +1,7 @@
 ﻿self.assetsManifest = {
   "assets": [
     {
-      "hash": "sha256-YX7WsXWcoMnbYzQ1u361UZzwewKX5qp9R84AefrApYw=",
+      "hash": "sha256-UcnignvTogEXr14hfWCgDfE8zc4S414cEUNvEpD+H7I=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -789,11 +789,11 @@
       "url": "_framework\/dotnet.5.0.4.js"
     },
     {
-      "hash": "sha256-c+bl2hNeOFHZm0AFYE6zCr2L8eN2qYc0K7abIvTnGVs=",
+      "hash": "sha256-eEN4AKUFveExgVfjWsslXYk1Rxpw8XoFGGYWDkXL7ZI=",
       "url": "_framework\/BoardWatcherClient.dll"
     },
     {
-      "hash": "sha256-IbBPXWCPQp\/8PL3ieveOQHUI\/+nsJaDBf9K50GGXePY=",
+      "hash": "sha256-eGIlcKKcIynuRMLgJ0SbVKkJ5J03Bj1ELiD\/opV\/W3g=",
       "url": "_framework\/BoardWatcherClient.pdb"
     },
     {
@@ -1653,13 +1653,13 @@
       "url": "sample-data\/weather.json"
     },
     {
-      "hash": "sha256-0fMlb01\/NaTYAEazZFQ\/Pro6HNI3Gy894fu9aXW0Tl4=",
+      "hash": "sha256-6eyhGVKDzYVj19mQ3iCAEXayrctOQ\/1g93c8hBdpFJY=",
       "url": "BoardWatcherClient.styles.css"
     },
     {
-      "hash": "sha256-RfQjOcCMYxNRKEn6uRrWjH\/xm+zpNwDvaER+PhjBGII=",
+      "hash": "sha256-vvzp\/A1\/X0m4s2s2zRMenGufm\/ZZbPfp+r\/83uJXGZA=",
       "url": "BoardWatcherClient.bundle.scp.css"
     }
   ],
-  "version": "Guc79o2T"
+  "version": "3gcxNiBm"
 };
