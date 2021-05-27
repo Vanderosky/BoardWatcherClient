@@ -209,7 +209,7 @@
     private List<Move> MovesHistory = new List<Move>();
     private List<string> MovesInNotation = new List<string>();
     private int moveCounter;
-    private int moveCount = 0;
+    private int moveInNotationCount;
     private CancellationTokenSource disposalTokenSource = new CancellationTokenSource();
     private ClientWebSocket webSocket = new ClientWebSocket();
     private string message = "Hello, websocket!";
@@ -225,6 +225,7 @@
         gameId = gameId ?? "Not provided";
         gameBoards.Add(await GameStateService.GetPieceData());
         moveCounter = 0;
+        moveInNotationCount = 0;
         try
         {
             string watchUrl = "wss://sleepy-falls-41701.herokuapp.com/watch?id=" + gameId;
@@ -233,32 +234,6 @@
             _ = sendLoop();
         }
         catch (Exception) { }
-        updateMovesInNotatioin();
-    }
-
-    public void updateMovesInNotatioin()
-    {
-        List<string> movesInNotation = new List<string>();
-        for (int i = 0; i < MovesHistory.Count; i++)
-        {
-            if (i > 0)
-            {
-                if (MovesHistory[i - 1].color == MovesHistory[i].color)
-                {
-                    movesInNotation.RemoveAt(movesInNotation.Count - 1);
-                    movesInNotation.Add(getMoveInNotation(MovesHistory[i], true));
-                }
-                else
-                {
-                    movesInNotation.Add(getMoveInNotation(MovesHistory[i]));
-                }
-            }
-            else
-            {
-                movesInNotation.Add(getMoveInNotation(MovesHistory[i]));
-            }
-        }
-        MovesInNotation = movesInNotation;
     }
 
     public void moveBackwards()
@@ -345,6 +320,27 @@
     {
         disposalTokenSource.Cancel();
         _ = webSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Bye", CancellationToken.None);
+    }
+
+    public void updateMovesInNotatioin()
+    {
+            if (moveInNotationCount > 0)
+            {
+                if (MovesHistory[moveInNotationCount - 1].color == MovesHistory[moveInNotationCount].color)
+                {
+                    MovesInNotation.RemoveAt(MovesInNotation.Count - 1);
+                    MovesInNotation.Add(getMoveInNotation(MovesHistory[moveInNotationCount], true));
+                }
+                else
+                {
+                    MovesInNotation.Add(getMoveInNotation(MovesHistory[moveInNotationCount]));
+                }
+            }
+            else
+            {
+                MovesInNotation.Add(getMoveInNotation(MovesHistory[moveInNotationCount]));
+            }
+        moveInNotationCount++;
     }
 
     public string getMoveInNotation(Move move, Boolean castle = false)
