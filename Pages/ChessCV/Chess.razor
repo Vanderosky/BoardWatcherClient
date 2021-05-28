@@ -46,129 +46,130 @@
                 <h6>Running in OpenCV Mode, Game ID: @gameId</h6>
             </div>
             <div class="center">
-            <table class="chess-board">
-                <tbody>
-                    <tr>
-                        <th></th>
-                        <th>a</th>
-                        <th>b</th>
-                        <th>c</th>
-                        <th>d</th>
-                        <th>e</th>
-                        <th>f</th>
-                        <th>g</th>
-                        <th>h</th>
-                    </tr>
+                <table class="chess-board">
+                    <tbody>
+                        <tr>
+                            <th></th>
+                            <th>a</th>
+                            <th>b</th>
+                            <th>c</th>
+                            <th>d</th>
+                            <th>e</th>
+                            <th>f</th>
+                            <th>g</th>
+                            <th>h</th>
+                        </tr>
 
-                    <tr>
-                        <th>8</th>
-                        @for (var i = 0; i < 8; i++)
-                        {
-                            if (i % 2 == 0)
+                        <tr>
+                            <th>8</th>
+                            @for (var i = 0; i < 8; i++)
                             {
-                                <td class="light">@GetPiece(gameBoards[moveCounter][0 + i])</td } else { <td class="dark">
-                                    @GetPiece(gameBoards[moveCounter][1 +
-            i])</td>
+                                if (i % 2 == 0)
+                                {
+                                    <td class="light">@GetPiece(gameBoards[moveCounter][0 + i])</td } else { <td class="dark">
+                                        @GetPiece(gameBoards[moveCounter][1 +
+                i])</td>
+                                }
                             }
-                        }
-                    </tr>
-                    <tr>
-                        <th>7</th>
-                        @for (var i = 0; i < 8; i++)
-                        {
-                            if (i % 2 == 0)
+                        </tr>
+                        <tr>
+                            <th>7</th>
+                            @for (var i = 0; i < 8; i++)
                             {
-                                <td class="dark">@GetPiece(gameBoards[moveCounter][8 + i])</td } else { <td class="light">
-                                    @GetPiece(gameBoards[moveCounter][9 +
-            i])</td>
+                                if (i % 2 == 0)
+                                {
+                                    <td class="dark">@GetPiece(gameBoards[moveCounter][8 + i])</td } else { <td class="light">
+                                        @GetPiece(gameBoards[moveCounter][9 +
+                i])</td>
+                                }
                             }
-                        }
-                    </tr>
-                    <tr>
-                        <th>6</th>
-                        @for (var i = 0; i < 8; i++)
-                        {
-                            if (i % 2 == 0)
+                        </tr>
+                        <tr>
+                            <th>6</th>
+                            @for (var i = 0; i < 8; i++)
                             {
-                                <td class="light">@GetPiece(gameBoards[moveCounter][16 + i])</td } else { <td class="dark">
-                                    @GetPiece(gameBoards[moveCounter][17
-            + i])</td>
+                                if (i % 2 == 0)
+                                {
+                                    <td class="light">@GetPiece(gameBoards[moveCounter][16 + i])</td } else { <td class="dark">
+                                        @GetPiece(gameBoards[moveCounter][17
+                + i])</td>
+                                }
                             }
-                        }
-                    </tr>
-                    <tr>
-                        <th>5</th>
-                        @for (var i = 0; i < 8; i++)
-                        {
-                            if (i % 2 == 0)
+                        </tr>
+                        <tr>
+                            <th>5</th>
+                            @for (var i = 0; i < 8; i++)
                             {
-                                <td class="dark">@GetPiece(gameBoards[moveCounter][24 + i])</td } else { <td class="light">
-                                    @GetPiece(gameBoards[moveCounter][25
-            + i])</td>
+                                if (i % 2 == 0)
+                                {
+                                    <td class="dark">@GetPiece(gameBoards[moveCounter][24 + i])</td } else { <td class="light">
+                                        @GetPiece(gameBoards[moveCounter][25
+                + i])</td>
+                                }
                             }
-                        }
-                    </tr>
-                    <tr>
-                        <th>4</th>
-                        @for (var i = 0; i < 8; i++)
-                        {
-                            if (i % 2 == 0)
+                        </tr>
+                        <tr>
+                            <th>4</th>
+                            @for (var i = 0; i < 8; i++)
                             {
-                                <td class="light">@GetPiece(gameBoards[moveCounter][32 + i])</td } else { <td class="dark">
-                                    @GetPiece(gameBoards[moveCounter][33
-            + i])</td>
+                                if (i % 2 == 0)
+                                {
+                                    <td class="light">@GetPiece(gameBoards[moveCounter][32 + i])</td } else { <td class="dark">
+                                        @GetPiece(gameBoards[moveCounter][33
+                + i])</td>
+                                }
                             }
-                        }
-                    </tr>
-                    <tr>
-                        <th>3</th>
-                        @for (var i = 0; i < 8; i++)
-                        {
-                            if (i % 2 == 0)
+                        </tr>
+                        <tr>
+                            <th>3</th>
+                            @for (var i = 0; i < 8; i++)
                             {
-                                <td class="dark">@GetPiece(gameBoards[moveCounter][40 + i])</td } else { <td class="light">
-                                    @GetPiece(gameBoards[moveCounter][41
-            + i])</td>
+                                if (i % 2 == 0)
+                                {
+                                    <td class="dark">@GetPiece(gameBoards[moveCounter][40 + i])</td } else { <td class="light">
+                                        @GetPiece(gameBoards[moveCounter][41
+                + i])</td>
+                                }
                             }
-                        }
-                    </tr>
-                    <tr>
-                        <th>2</th>
-                        @for (var i = 0; i < 8; i++)
-                        {
-                            if (i % 2 == 0)
+                        </tr>
+                        <tr>
+                            <th>2</th>
+                            @for (var i = 0; i < 8; i++)
                             {
-                                <td class="light">@GetPiece(gameBoards[moveCounter][48 + i])</td } else { <td class="dark">
-                                    @GetPiece(gameBoards[moveCounter][49
-            + i])</td>
+                                if (i % 2 == 0)
+                                {
+                                    <td class="light">@GetPiece(gameBoards[moveCounter][48 + i])</td } else { <td class="dark">
+                                        @GetPiece(gameBoards[moveCounter][49
+                + i])</td>
+                                }
                             }
-                        }
-                    </tr>
-                    <tr>
-                        <th>1</th>
-                        @for (var i = 0; i < 8; i++)
-                        {
-                            if (i % 2 == 0)
+                        </tr>
+                        <tr>
+                            <th>1</th>
+                            @for (var i = 0; i < 8; i++)
                             {
-                                <td class="dark">@GetPiece(gameBoards[moveCounter][56 + i])</td } else { <td class="light">
-                                    @GetPiece(gameBoards[moveCounter][57
-            + i])</td>
+                                if (i % 2 == 0)
+                                {
+                                    <td class="dark">@GetPiece(gameBoards[moveCounter][56 + i])</td } else { <td class="light">
+                                        @GetPiece(gameBoards[moveCounter][57
+                + i])</td>
+                                }
                             }
-                        }
-                    </tr>
-                </tbody>
-            </table>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             <div class="pgn-mobile">
                 <p>
-                @for (int index = 0; index < MovesInNotation.Count; index += 2)
-                {
-                        @MovesInNotation[index];
+                    @for (int index = 0; index < MovesInNotation.Count; index += 2)
+                    {
+                        @MovesInNotation[index]
+                        ;
                         @if (index < MovesInNotation.Count - 1)
                         {
                             @MovesInNotation[index + 1]
                         }
-                }
+                    }
                 </p>
             </div>
             <div class="center">
@@ -513,15 +514,34 @@
         {
             fieldName += ((char)(move.to % 8 + 97));
             fieldName += (8 - move.to / 8).ToString();
-            if (move.piece == 6)
+            if (castle)
             {
-                fieldName += " O-O"; //kingside castle
-                return fieldName;
-            }
-            if (move.piece == 5)
-            {
-                fieldName += " O-O-O"; //quenside castle
-                return fieldName;
+                if (move.color = true)
+                {
+                    if (move.to < 4)
+                    {
+                        fieldName += " O-O-O"; //kingside castle
+                        return fieldName;
+                    }
+                    if (move.to > 7)
+                    {
+                        fieldName += " O-O"; //kingside castle
+                        return fieldName;
+                    }
+                }
+                else
+                {
+                    if (move.to > 60)
+                    {
+                        fieldName += " O-O"; //kingside castle
+                        return fieldName;
+                    }
+                    if (move.to < 60)
+                    {
+                        fieldName += " O-O-O"; //kingside castle
+                        return fieldName;
+                    }
+                }
             }
         }
         fieldName += getPieceName(move.piece);
