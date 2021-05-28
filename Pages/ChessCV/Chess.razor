@@ -527,6 +527,7 @@
         fieldName += getPieceName(move.piece);
         if (gameBoards[moveCounter][move.to].Id != 0) // check if capture
         {
+            fieldName += ((char)(move.from % 8 + 97));
             fieldName += "x";
         }
         fieldName += ((char)(move.to % 8 + 97));
