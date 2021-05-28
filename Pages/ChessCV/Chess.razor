@@ -300,6 +300,11 @@
         {
             gameBoards.RemoveAt(gameBoards.Count - 1);
         }
+        if (moveInNotationCount > 0) moveInNotationCount--;
+        if (MovesInNotation.Any())
+        {
+            MovesInNotation.RemoveAt(MovesInNotation.Count - 1);
+        }
     }
 
     public void AddMove(Move move)
@@ -355,8 +360,11 @@
                 fieldName += " O-O"; //kingside castle
                 return fieldName;
             }
-            fieldName += " O-O-O"; //quenside castle
-            return fieldName;
+            if (move.piece == 5)
+            {
+                fieldName += " O-O-O"; //quenside castle
+                return fieldName;
+            }
         }
         fieldName += getPieceName(move.piece);
         if (gameBoards[moveCounter][move.to].Id != 0) // check if capture
