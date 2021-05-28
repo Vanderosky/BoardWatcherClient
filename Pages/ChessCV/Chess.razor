@@ -8,10 +8,12 @@
 @using System.Net.WebSockets
 @implements IDisposable
 @using Newtonsoft.Json
+@using BlazorPro.BlazorSize
 
-<div>
-    <h5>Connection @webSocket.State</h5>
-</div>
+
+<MediaQuery Media="@Breakpoints.OnlyMedium" @bind-Matches="IsMedium" />
+<MediaQuery Media="@Breakpoints.SmallDown" @bind-Matches="IsSmall" />
+
 @if (webSocket.State == WebSocketState.Connecting || webSocket.State == WebSocketState.None)
 {
     <div class="center">
@@ -30,15 +32,168 @@
         <h1>Lost connection with game: @gameId, try to reconnect again</h1>
     </div>
 }
+
+<div>
+    <h5>Connection @webSocket.State</h5>
+</div>
 @if (webSocket.State == WebSocketState.Open)
 {
-    @if (gameId != null)
+    @if (IsSmall)
     {
-        <div class="center">
-            <h1>Running in OpenCV Mode, Game ID: @gameId</h1>
-        </div>
+        @if (gameId != null)
+        {
+            <div class="center">
+                <h6>Running in OpenCV Mode, Game ID: @gameId</h6>
+            </div>
+            <table class="chess-board">
+                <tbody>
+                    <tr>
+                        <th></th>
+                        <th>a</th>
+                        <th>b</th>
+                        <th>c</th>
+                        <th>d</th>
+                        <th>e</th>
+                        <th>f</th>
+                        <th>g</th>
+                        <th>h</th>
+                    </tr>
+
+                    <tr>
+                        <th>8</th>
+                        @for (var i = 0; i < 8; i++)
+                        {
+                            if (i % 2 == 0)
+                            {
+                                <td class="light">@GetPiece(gameBoards[moveCounter][0 + i])</td } else { <td class="dark">
+                                    @GetPiece(gameBoards[moveCounter][1 +
+            i])</td>
+                            }
+                        }
+                    </tr>
+                    <tr>
+                        <th>7</th>
+                        @for (var i = 0; i < 8; i++)
+                        {
+                            if (i % 2 == 0)
+                            {
+                                <td class="dark">@GetPiece(gameBoards[moveCounter][8 + i])</td } else { <td class="light">
+                                    @GetPiece(gameBoards[moveCounter][9 +
+            i])</td>
+                            }
+                        }
+                    </tr>
+                    <tr>
+                        <th>6</th>
+                        @for (var i = 0; i < 8; i++)
+                        {
+                            if (i % 2 == 0)
+                            {
+                                <td class="light">@GetPiece(gameBoards[moveCounter][16 + i])</td } else { <td class="dark">
+                                    @GetPiece(gameBoards[moveCounter][17
+            + i])</td>
+                            }
+                        }
+                    </tr>
+                    <tr>
+                        <th>5</th>
+                        @for (var i = 0; i < 8; i++)
+                        {
+                            if (i % 2 == 0)
+                            {
+                                <td class="dark">@GetPiece(gameBoards[moveCounter][24 + i])</td } else { <td class="light">
+                                    @GetPiece(gameBoards[moveCounter][25
+            + i])</td>
+                            }
+                        }
+                    </tr>
+                    <tr>
+                        <th>4</th>
+                        @for (var i = 0; i < 8; i++)
+                        {
+                            if (i % 2 == 0)
+                            {
+                                <td class="light">@GetPiece(gameBoards[moveCounter][32 + i])</td } else { <td class="dark">
+                                    @GetPiece(gameBoards[moveCounter][33
+            + i])</td>
+                            }
+                        }
+                    </tr>
+                    <tr>
+                        <th>3</th>
+                        @for (var i = 0; i < 8; i++)
+                        {
+                            if (i % 2 == 0)
+                            {
+                                <td class="dark">@GetPiece(gameBoards[moveCounter][40 + i])</td } else { <td class="light">
+                                    @GetPiece(gameBoards[moveCounter][41
+            + i])</td>
+                            }
+                        }
+                    </tr>
+                    <tr>
+                        <th>2</th>
+                        @for (var i = 0; i < 8; i++)
+                        {
+                            if (i % 2 == 0)
+                            {
+                                <td class="light">@GetPiece(gameBoards[moveCounter][48 + i])</td } else { <td class="dark">
+                                    @GetPiece(gameBoards[moveCounter][49
+            + i])</td>
+                            }
+                        }
+                    </tr>
+                    <tr>
+                        <th>1</th>
+                        @for (var i = 0; i < 8; i++)
+                        {
+                            if (i % 2 == 0)
+                            {
+                                <td class="dark">@GetPiece(gameBoards[moveCounter][56 + i])</td } else { <td class="light">
+                                    @GetPiece(gameBoards[moveCounter][57
+            + i])</td>
+                            }
+                        }
+                    </tr>
+                </tbody>
+            </table>
+            <div class="pgn-mobile">
+                @for (int index = 0; index < MovesInNotation.Count; index += 2)
+                {
+                    <p>@MovesInNotation[index]</p>
+                    @if (index < MovesInNotation.Count - 1)
+                    {
+                        <p>@MovesInNotation[index + 1]</p>
+                    }
+                    else
+                    {
+                        <p> </p>
+                    }
+                }
+            </div>
+            <div class="center">
+                <button class="btn btn-primary" @onclick="skipBackwards"> <span class="oi oi-media-skip-backward"
+            aria-hidden="true"></span></button>
+                <button class="btn btn-primary" @onclick="moveBackwards"> <span class="oi oi-media-step-backward"
+            aria-hidden="true"></span></button>
+                <button class="btn btn-primary" @onclick="moveForward"> <span class="oi oi-media-step-forward"
+            aria-hidden="true"></span></button>
+                <button class="btn btn-primary" @onclick="skipForward"> <span class="oi oi-media-skip-forward"
+            aria-hidden="true"></span></button>
+            </div>
+            <div class="center updated-mobile">
+                <p>Last updated at @updateDate.Hour:@updateDate.Minute:@updateDate.Second</p>
+            </div>
+        }
     }
+    else
     {
+        @if (gameId != null)
+        {
+            <div class="center">
+                <h1>Running in OpenCV Mode, Game ID: @gameId</h1>
+            </div>
+        }
         <div class="flex-container">
             <div class="flex-child">
                 <table class="chess-board">
@@ -215,6 +370,9 @@
     private string message = "Hello, websocket!";
     private DateTime updateDate = DateTime.Now;
 
+    bool IsMedium = false;
+    bool IsSmall = false;
+
     [Parameter]
     public string gameId { get; set; }
     [Parameter]
@@ -329,22 +487,22 @@
 
     public void updateMovesInNotatioin()
     {
-            if (moveInNotationCount > 0)
+        if (moveInNotationCount > 0)
+        {
+            if (MovesHistory[moveInNotationCount - 1].color == MovesHistory[moveInNotationCount].color)
             {
-                if (MovesHistory[moveInNotationCount - 1].color == MovesHistory[moveInNotationCount].color)
-                {
-                    MovesInNotation.RemoveAt(MovesInNotation.Count - 1);
-                    MovesInNotation.Add(getMoveInNotation(MovesHistory[moveInNotationCount], true));
-                }
-                else
-                {
-                    MovesInNotation.Add(getMoveInNotation(MovesHistory[moveInNotationCount]));
-                }
+                MovesInNotation.RemoveAt(MovesInNotation.Count - 1);
+                MovesInNotation.Add(getMoveInNotation(MovesHistory[moveInNotationCount], true));
             }
             else
             {
                 MovesInNotation.Add(getMoveInNotation(MovesHistory[moveInNotationCount]));
             }
+        }
+        else
+        {
+            MovesInNotation.Add(getMoveInNotation(MovesHistory[moveInNotationCount]));
+        }
         moveInNotationCount++;
     }
 
