@@ -45,6 +45,7 @@
             <div class="center">
                 <h6>Running in OpenCV Mode, Game ID: @gameId</h6>
             </div>
+            <div class="center">
             <table class="chess-board">
                 <tbody>
                     <tr>
@@ -157,19 +158,18 @@
                     </tr>
                 </tbody>
             </table>
+            </div>
             <div class="pgn-mobile">
+                <p>
                 @for (int index = 0; index < MovesInNotation.Count; index += 2)
                 {
-                    <p>@MovesInNotation[index]</p>
-                    @if (index < MovesInNotation.Count - 1)
-                    {
-                        <p>@MovesInNotation[index + 1]</p>
-                    }
-                    else
-                    {
-                        <p> </p>
-                    }
+                        @MovesInNotation[index];
+                        @if (index < MovesInNotation.Count - 1)
+                        {
+                            @MovesInNotation[index + 1]
+                        }
                 }
+                </p>
             </div>
             <div class="center">
                 <button class="btn btn-primary" @onclick="skipBackwards"> <span class="oi oi-media-skip-backward"
@@ -531,6 +531,7 @@
         }
         fieldName += ((char)(move.to % 8 + 97));
         fieldName += (8 - move.to / 8).ToString();
+        fieldName += " ";
         return fieldName;
     }
 

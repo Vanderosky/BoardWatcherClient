@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+
 public class PieceAI
 {
     public string place { get; set; }
