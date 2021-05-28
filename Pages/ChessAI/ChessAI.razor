@@ -1,6 +1,7 @@
 @page "/chess/AI/{gameId?}"
 
 @using BoardWatcherClient
+@inject HttpClient HttpClient
 @inject ChessGameStateService GameStateService
 @inject IJSRuntime JSRuntime
 
@@ -16,7 +17,7 @@
 }
 else
 {
-    <div class="flex-container">
+    @* <div class="flex-container">
         <div class="flex-child center">
             <table class="chess-board">
                 <tbody>
@@ -38,7 +39,7 @@ else
                         {
                             if (i % 2 == 0)
                             {
-                                <td class="light">@GetPiece(gameBoard[0 + i])</td } else { <td class="dark">@GetPiece(gameBoard[1 +
+                                <td class="light">@GetPiece(gameBoard.pieces[0 + i])</td } else { <td class="dark">@GetPiece(gameBoard.pieces[1 +
                     i])</td>
                             }
                         }
@@ -123,96 +124,57 @@ else
                 </tbody>
             </table>
         </div>
-    </div>
+    </div> *@
 }
 
 @code {
-    private List<PieceCV> gameBoard;
-    private List<string> MovesInNotation = new List<string>();
-
+    private ChessBoardAI gameBoard;
+    private readonly HttpClient httpClient;
+    private readonly Uri RequestUri = new Uri("https://sleepy-falls-41701.herokuapp.com/AI/get?id=y06HK");
     [Parameter]
     public string gameId { get; set; }
     [Parameter]
     public string gameType { get; set; }
     protected override async Task OnInitializedAsync()
     {
-        gameId = gameId ?? "Not provided";
-        gameBoard = await GameStateService.GetPieceData();
-        Move[] moves = new Move[]
-        {
-            new Move(1 ,48, 40, true),
-            new Move(1, 9, 17, true),
-            new Move(1, 50, 42, true),
-            new Move(4, 2, 16, true),
-            new Move(3 ,62, 47, true),
-            new Move(4, 16, 52, true),
-            new Move(4, 61, 52, true)
-        };
+        @* gameId = gameId ?? "Not provided";
+        HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, RequestUri);
+        request.Headers.Add("Content-Type", "application/json");
+        using var httpResponse = await HttpClient.SendAsync(request);
+        gameBoard = await httpResponse.Content.GetFromJsonAsync<ChessBoardAI>(RequestUri);
+        Console.WriteLine(gameBoard.pieces[0].piece); *@
     }
 
-    public string getPieceName(int pieceId)
+    public string GetPiece(PieceAI piece)
     {
-        switch (pieceId)
-        {
-            case 0:
-                return "";
-            case 1:
-                return ""; // pawn
-            case 2:
-                return "R"; // rook
-            case 3:
-                return "N"; // knight
-            case 4:
-                return "B"; // bishop
-            case 5:
-                return "Q"; // queen
-            case 6:
-                return "K"; // king
-        }
-        return "";
-    }
-
-    public string GetPiece(PieceCV piece)
-    {
-        if (piece.Color)
-        {
-            switch (piece.Id)
+            switch (piece.piece)
             {
-                case 1:
+                case "Black-Pawn":
                     return "♙";
-                case 2:
+                case "Black-Rook":
                     return "♖";
-                case 3:
+                case "Black-Knight":
                     return "♘";
-                case 4:
+                case "Black-Bishop":
                     return "♗";
-                case 5:
+                case "Black-Queen":
                     return "♕";
-                case 6:
+                case "Black-King":
+                    return "♔";
+                case "White-Pawn":
+                    return "♙";
+                case "White-Rook":
+                    return "♖";
+                case "White-Knight":
+                    return "♘";
+                case "White-Bishop":
+                    return "♗";
+                case "White-Queen":
+                    return "♕";
+                case "White-King":
                     return "♔";
                 default:
                     return "";
             }
-        }
-        else
-        {
-            switch (piece.Id)
-            {
-                case 1:
-                    return "♟";
-                case 2:
-                    return "♜";
-                case 3:
-                    return "♞";
-                case 4:
-                    return "♝";
-                case 5:
-                    return "♛";
-                case 6:
-                    return "♚";
-                default:
-                    return "";
-            }
-        }
     }
 }

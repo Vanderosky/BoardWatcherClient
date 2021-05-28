@@ -17,7 +17,7 @@
       "url": "_content\/BlazorPro.BlazorSize\/blazorSizeResizeModule.js"
     },
     {
-      "hash": "sha256-fCqKk6kWiSY+mwsyOEVQ1ZyfUcaXKV6ZxamcevJj7nE=",
+      "hash": "sha256-QVBQQKQpg3q+yPy4QFZIuAVQhzXhls7yjUixptfnTZw=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -51,6 +51,22 @@
     {
       "hash": "sha256-grJppr5rXiGmkAtdiCR04Z7NXclvICBPwE6aHeOvMEQ=",
       "url": "_framework\/Microsoft.AspNetCore.Components.WebAssembly.dll"
+    },
+    {
+      "hash": "sha256-a6fdLU2+pLdxE\/8nxhssfgbn7Zn+9mX5+7R3vdMhHkQ=",
+      "url": "_framework\/Microsoft.AspNetCore.Cors.dll"
+    },
+    {
+      "hash": "sha256-qFKmKNr9iAZiZxOVvLJBfMhkKfDy1GvY81fHh1hiphU=",
+      "url": "_framework\/Microsoft.AspNetCore.Http.Abstractions.dll"
+    },
+    {
+      "hash": "sha256-dsGZ+sGJdrYngMg72CIF31THFtl6ovcKTjtGtj9orn8=",
+      "url": "_framework\/Microsoft.AspNetCore.Http.Extensions.dll"
+    },
+    {
+      "hash": "sha256-J2xQUZ4BD6tsrQkvGS5HDQfkTGMzmaS76TA9nJrtCpg=",
+      "url": "_framework\/Microsoft.AspNetCore.Http.Features.dll"
     },
     {
       "hash": "sha256-Nrk\/sxkTZ7u4RptdiqlrDIxD6Jn75o7P3ClM\/NmIZRo=",
@@ -119,6 +135,10 @@
     {
       "hash": "sha256-YlYt1zT1hT+aqQZN29dDxRiK4W\/IlVEC3wpLUTx9jtY=",
       "url": "_framework\/Microsoft.JSInterop.WebAssembly.dll"
+    },
+    {
+      "hash": "sha256-P66ftDrXwc6ayND8uYzIk0CPQy1GjNZAPHx9RMhi3V4=",
+      "url": "_framework\/Microsoft.Net.Http.Headers.dll"
     },
     {
       "hash": "sha256-cs8pHUurDt0IqbB8YXPh560au3q3J\/1wRL9jBddRVmE=",
@@ -817,11 +837,11 @@
       "url": "_framework\/dotnet.5.0.4.js"
     },
     {
-      "hash": "sha256-jjBXX15OLVUXGRWq4uGdDCBiPAGNM01HpVgdDrl7M\/Q=",
+      "hash": "sha256-jovfaWdvQCJn+qdWLqiRIYny\/iPNs4xiIDuK3YUY8IY=",
       "url": "_framework\/BoardWatcherClient.dll"
     },
     {
-      "hash": "sha256-yM23tIC9kUUQk2lOIQ16S84kB79b6Sm\/6VHQ9SODVpE=",
+      "hash": "sha256-swXzHZ336PjzXbNg8P7iayom3urRkqqMfZBWFOF6MSc=",
       "url": "_framework\/BoardWatcherClient.pdb"
     },
     {
@@ -859,6 +879,22 @@
     {
       "hash": "sha256-JcjB1DExak\/jv5Ic2Q9dfvxcDQ8zqQ9WVdT3k7kiSfQ=",
       "url": "_framework\/Microsoft.AspNetCore.Components.WebAssembly.dll.gz"
+    },
+    {
+      "hash": "sha256-rKY9WZp6JXNUtlMI\/EYkD0r6g0gGIczrSZB3riUe7Vs=",
+      "url": "_framework\/Microsoft.AspNetCore.Cors.dll.gz"
+    },
+    {
+      "hash": "sha256-v073tcWufURkzn+IUBwJ5JZQoXDWfDZakC7FQju8LfM=",
+      "url": "_framework\/Microsoft.AspNetCore.Http.Abstractions.dll.gz"
+    },
+    {
+      "hash": "sha256-AyVH\/EsEuwYMbfGXWoGn7oRU0wySxWKpiQK+C0Inpm0=",
+      "url": "_framework\/Microsoft.AspNetCore.Http.Extensions.dll.gz"
+    },
+    {
+      "hash": "sha256-5vONhctm8NjkYBizJhEbDKY1PXriW8DL2En37UkUqIo=",
+      "url": "_framework\/Microsoft.AspNetCore.Http.Features.dll.gz"
     },
     {
       "hash": "sha256-MMHhlTTtY606B0Bzi6BwuIhiq67mmjd\/AR89ifIuS6s=",
@@ -927,6 +963,10 @@
     {
       "hash": "sha256-PK8ybzyPAMD9UBrd7jKOQdl4MBd2npyCFVQ21SGTHLQ=",
       "url": "_framework\/Microsoft.JSInterop.WebAssembly.dll.gz"
+    },
+    {
+      "hash": "sha256-HTTstXXeqTpS0FGcNNRw5oRcz5KvtITYTT\/ZhWvstzQ=",
+      "url": "_framework\/Microsoft.Net.Http.Headers.dll.gz"
     },
     {
       "hash": "sha256-NC8CJsUgrE5xQNKmxdKZAHgu8r+RqoWbNar2oWWdSD4=",
@@ -1693,13 +1733,13 @@
       "url": "sample-data\/weather.json"
     },
     {
-      "hash": "sha256-iFqAbbkzHJT4SZKndP78ZYYIZtRh0QxIp\/L3mYLPnWQ=",
+      "hash": "sha256-vJZcgx2AALKpQHKTXMRKgXX9+d8lDlPSSUL0eS67HH0=",
       "url": "BoardWatcherClient.styles.css"
     },
     {
-      "hash": "sha256-HImrG4QFoIgZ1T9B6\/wX32kR6YtfPKrgSI09CQr2y9M=",
+      "hash": "sha256-KSLas0Jg3x7nnwnkBFyUX4O1w8WkIUaHvkvs1n22EYQ=",
       "url": "BoardWatcherClient.bundle.scp.css"
     }
   ],
-  "version": "zoK9Wvfm"
+  "version": "jAgxJ07G"
 };
