@@ -1,9 +1,13 @@
 @page "/chess/AI/{gameId?}"
 
 @using BoardWatcherClient
+@using Newtonsoft.Json
+@using System.Net.Http
 @inject HttpClient HttpClient
 @inject ChessGameStateService GameStateService
 @inject IJSRuntime JSRuntime
+@inject HttpClient Http
+
 
 @if (gameId != null)
 {
@@ -20,112 +24,112 @@ else
 {
     @* <div class="flex-container">
         <div class="flex-child center">
-            <table class="chess-board">
-                <tbody>
-                    <tr>
-                        <th></th>
-                        <th>a</th>
-                        <th>b</th>
-                        <th>c</th>
-                        <th>d</th>
-                        <th>e</th>
-                        <th>f</th>
-                        <th>g</th>
-                        <th>h</th>
-                    </tr>
+        <table class="chess-board">
+        <tbody>
+        <tr>
+        <th></th>
+        <th>a</th>
+        <th>b</th>
+        <th>c</th>
+        <th>d</th>
+        <th>e</th>
+        <th>f</th>
+        <th>g</th>
+        <th>h</th>
+        </tr>
 
-                    <tr>
-                        <th>8</th>
-                        @for (var i = 0; i < 8; i++)
-                        {
-                            if (i % 2 == 0)
-                            {
-                                <td class="light">@GetPiece(gameBoard.pieces[0 + i])</td } else { <td class="dark">@GetPiece(gameBoard.pieces[1 +
-                    i])</td>
-                            }
-                        }
-                    </tr>
-                    <tr>
-                        <th>7</th>
-                        @for (var i = 0; i < 8; i++)
-                        {
-                            if (i % 2 == 0)
-                            {
-                                <td class="dark">@GetPiece(gameBoard[8 + i])</td } else { <td class="light">@GetPiece(gameBoard[9 +
-                    i])</td>
-                            }
-                        }
-                    </tr>
-                    <tr>
-                        <th>6</th>
-                        @for (var i = 0; i < 8; i++)
-                        {
-                            if (i % 2 == 0)
-                            {
-                                <td class="light">@GetPiece(gameBoard[16 + i])</td } else { <td class="dark">@GetPiece(gameBoard[17
-                    + i])</td>
-                            }
-                        }
-                    </tr>
-                    <tr>
-                        <th>5</th>
-                        @for (var i = 0; i < 8; i++)
-                        {
-                            if (i % 2 == 0)
-                            {
-                                <td class="dark">@GetPiece(gameBoard[24 + i])</td } else { <td class="light">@GetPiece(gameBoard[25
-                    + i])</td>
-                            }
-                        }
-                    </tr>
-                    <tr>
-                        <th>4</th>
-                        @for (var i = 0; i < 8; i++)
-                        {
-                            if (i % 2 == 0)
-                            {
-                                <td class="light">@GetPiece(gameBoard[32 + i])</td } else { <td class="dark">@GetPiece(gameBoard[33
-                    + i])</td>
-                            }
-                        }
-                    </tr>
-                    <tr>
-                        <th>3</th>
-                        @for (var i = 0; i < 8; i++)
-                        {
-                            if (i % 2 == 0)
-                            {
-                                <td class="dark">@GetPiece(gameBoard[40 + i])</td } else { <td class="light">@GetPiece(gameBoard[41
-                    + i])</td>
-                            }
-                        }
-                    </tr>
-                    <tr>
-                        <th>2</th>
-                        @for (var i = 0; i < 8; i++)
-                        {
-                            if (i % 2 == 0)
-                            {
-                                <td class="light">@GetPiece(gameBoard[48 + i])</td } else { <td class="dark">@GetPiece(gameBoard[49
-                    + i])</td>
-                            }
-                        }
-                    </tr>
-                    <tr>
-                        <th>1</th>
-                        @for (var i = 0; i < 8; i++)
-                        {
-                            if (i % 2 == 0)
-                            {
-                                <td class="dark">@GetPiece(gameBoard[56 + i])</td } else { <td class="light">@GetPiece(gameBoard[57
-                    + i])</td>
-                            }
-                        }
-                    </tr>
-                </tbody>
-            </table>
+        <tr>
+        <th>8</th>
+        @for (var i = 0; i < 8; i++)
+        {
+        if (i % 2 == 0)
+        {
+        <td class="light">@GetPiece(gameBoard.pieces[0 + i])</td } else { <td class="dark">@GetPiece(gameBoard.pieces[1 +
+        i])</td>
+        }
+        }
+        </tr>
+        <tr>
+        <th>7</th>
+        @for (var i = 0; i < 8; i++)
+        {
+        if (i % 2 == 0)
+        {
+        <td class="dark">@GetPiece(gameBoard[8 + i])</td } else { <td class="light">@GetPiece(gameBoard[9 +
+        i])</td>
+        }
+        }
+        </tr>
+        <tr>
+        <th>6</th>
+        @for (var i = 0; i < 8; i++)
+        {
+        if (i % 2 == 0)
+        {
+        <td class="light">@GetPiece(gameBoard[16 + i])</td } else { <td class="dark">@GetPiece(gameBoard[17
+        + i])</td>
+        }
+        }
+        </tr>
+        <tr>
+        <th>5</th>
+        @for (var i = 0; i < 8; i++)
+        {
+        if (i % 2 == 0)
+        {
+        <td class="dark">@GetPiece(gameBoard[24 + i])</td } else { <td class="light">@GetPiece(gameBoard[25
+        + i])</td>
+        }
+        }
+        </tr>
+        <tr>
+        <th>4</th>
+        @for (var i = 0; i < 8; i++)
+        {
+        if (i % 2 == 0)
+        {
+        <td class="light">@GetPiece(gameBoard[32 + i])</td } else { <td class="dark">@GetPiece(gameBoard[33
+        + i])</td>
+        }
+        }
+        </tr>
+        <tr>
+        <th>3</th>
+        @for (var i = 0; i < 8; i++)
+        {
+        if (i % 2 == 0)
+        {
+        <td class="dark">@GetPiece(gameBoard[40 + i])</td } else { <td class="light">@GetPiece(gameBoard[41
+        + i])</td>
+        }
+        }
+        </tr>
+        <tr>
+        <th>2</th>
+        @for (var i = 0; i < 8; i++)
+        {
+        if (i % 2 == 0)
+        {
+        <td class="light">@GetPiece(gameBoard[48 + i])</td } else { <td class="dark">@GetPiece(gameBoard[49
+        + i])</td>
+        }
+        }
+        </tr>
+        <tr>
+        <th>1</th>
+        @for (var i = 0; i < 8; i++)
+        {
+        if (i % 2 == 0)
+        {
+        <td class="dark">@GetPiece(gameBoard[56 + i])</td } else { <td class="light">@GetPiece(gameBoard[57
+        + i])</td>
+        }
+        }
+        </tr>
+        </tbody>
+        </table>
         </div>
-    </div> *@
+        </div> *@
 }
 
 @code {
@@ -138,44 +142,41 @@ else
     public string gameType { get; set; }
     protected override async Task OnInitializedAsync()
     {
-        @* gameId = gameId ?? "Not provided";
-        HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, RequestUri);
-        request.Headers.Add("Content-Type", "application/json");
-        using var httpResponse = await HttpClient.SendAsync(request);
-        gameBoard = await httpResponse.Content.GetFromJsonAsync<ChessBoardAI>(RequestUri);
-        Console.WriteLine(gameBoard.pieces[0].piece); *@
+        gameId = gameId ?? "Not provided";
+        gameBoard = await Http.GetFromJsonAsync<ChessBoardAI>("https://sleepy-falls-41701.herokuapp.com/AI/get?id=y06HK");
     }
+
 
     public string GetPiece(PieceAI piece)
     {
-            switch (piece.piece)
-            {
-                case "Black-Pawn":
-                    return "♙";
-                case "Black-Rook":
-                    return "♖";
-                case "Black-Knight":
-                    return "♘";
-                case "Black-Bishop":
-                    return "♗";
-                case "Black-Queen":
-                    return "♕";
-                case "Black-King":
-                    return "♔";
-                case "White-Pawn":
-                    return "♙";
-                case "White-Rook":
-                    return "♖";
-                case "White-Knight":
-                    return "♘";
-                case "White-Bishop":
-                    return "♗";
-                case "White-Queen":
-                    return "♕";
-                case "White-King":
-                    return "♔";
-                default:
-                    return "";
-            }
+        switch (piece.piece)
+        {
+            case "Black-Pawn":
+                return "♙";
+            case "Black-Rook":
+                return "♖";
+            case "Black-Knight":
+                return "♘";
+            case "Black-Bishop":
+                return "♗";
+            case "Black-Queen":
+                return "♕";
+            case "Black-King":
+                return "♔";
+            case "White-Pawn":
+                return "♙";
+            case "White-Rook":
+                return "♖";
+            case "White-Knight":
+                return "♘";
+            case "White-Bishop":
+                return "♗";
+            case "White-Queen":
+                return "♕";
+            case "White-King":
+                return "♔";
+            default:
+                return "";
+        }
     }
 }

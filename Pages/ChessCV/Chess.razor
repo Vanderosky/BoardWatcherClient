@@ -516,14 +516,14 @@
             fieldName += (8 - move.to / 8).ToString();
             if (castle)
             {
-                if (move.color = true)
+                if (move.color)
                 {
                     if (move.to < 4)
                     {
                         fieldName += " O-O-O"; //kingside castle
                         return fieldName;
                     }
-                    if (move.to > 7)
+                    else
                     {
                         fieldName += " O-O"; //kingside castle
                         return fieldName;
@@ -536,7 +536,7 @@
                         fieldName += " O-O"; //kingside castle
                         return fieldName;
                     }
-                    if (move.to < 60)
+                    else
                     {
                         fieldName += " O-O-O"; //kingside castle
                         return fieldName;

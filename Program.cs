@@ -22,6 +22,10 @@ namespace BoardWatcherClient
             builder.Services.AddSingleton<ChessGameStateService>();
             builder.Services.AddSingleton<RoutingService>();
             builder.Services.AddMediaQueryService();
+            // builder.Services.UseCors(policy =>
+            //     policy.WithOrigins("http://localhost:5000", "https://localhost:5001")
+            //     .AllowAnyMethod()
+            //     .WithHeaders(HeaderNames.ContentType));
             await builder.Build().RunAsync();
         }
     }
