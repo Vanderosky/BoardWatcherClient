@@ -1,7 +1,7 @@
 # **BoardWatcherClient Documentary**
 Refer to [**BoardWatcher**](https://gitlab.com/board-watcher) for the rest of the project.
 ## About application
-This is client web application for spectating live chess game analysed with BoardWatcher.
+This is client web application for spectating live chess game analysed with BoardWatcher.\
     BoarWatcher Client Application was created with Blazor WebAssembly. This framework has following pros and cons:
         +Code is written almost exclusively in C# instead of JavaScript.\
         +Has support of entire .NET Framework with all its libraries.\
