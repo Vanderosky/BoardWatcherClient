@@ -21,7 +21,7 @@ Enter into project directory with terminal, and run application
 ```sh
 dotnet watch run
 ```
-It will run on https://localhost:5001
+It will run on https://localhost:5001\
 To publish app, run
 ```sh
 dotnet publish -c Release
