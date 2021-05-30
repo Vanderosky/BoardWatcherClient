@@ -17,7 +17,7 @@
       "url": "_content\/BlazorPro.BlazorSize\/blazorSizeResizeModule.js"
     },
     {
-      "hash": "sha256-3McsUi2i3+ewSmDPC4sYzAyaPd4OeL9N08ZdUytocz8=",
+      "hash": "sha256-\/GgipuirXT7OzFH8irIs1Yd8SrjU9yg6WJc8qqQ2nDA=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -841,11 +841,11 @@
       "url": "_framework\/dotnet.5.0.4.js"
     },
     {
-      "hash": "sha256-XDdPqEe2HZlqBcV2W\/hYifgqEts2QnH1gLbBwZzL7eU=",
+      "hash": "sha256-cPm9UVd6OjnlGjVD94Sj7HK3YOmyyEcJHbRSYmrI8JY=",
       "url": "_framework\/BoardWatcherClient.dll"
     },
     {
-      "hash": "sha256-xnZlwI2ufsGh2QdA5C3GHrRtAjN0XUPNilDtohph5bQ=",
+      "hash": "sha256-0TqVTSLwWXPrVu3SmWVlorNNXlS\/pEbHWqMhkTYBepg=",
       "url": "_framework\/BoardWatcherClient.pdb"
     },
     {
@@ -1749,5 +1749,5 @@
       "url": "BoardWatcherClient.bundle.scp.css"
     }
   ],
-  "version": "zLSVfjg+"
+  "version": "MTl1jKHD"
 };

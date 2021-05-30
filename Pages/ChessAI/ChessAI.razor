@@ -7,7 +7,7 @@
 @inject ChessGameStateService GameStateService
 @inject IJSRuntime JSRuntime
 @inject HttpClient Http
-
+@inject RoutingService routingService
 
 @if (gameId != null)
 {
@@ -137,8 +137,7 @@ else
         </div>
     </div>
     <div class="center pgn-mobile">
-        <button class="btn btn-primary" @onclick="fetchBoard"> <span
-            aria-hidden="true">Refresh</span></button>
+        <button class="btn btn-primary" @onclick="fetchBoard"> <span aria-hidden="true">Refresh</span></button>
     </div>
 }
 
@@ -153,12 +152,14 @@ else
     protected override async Task OnInitializedAsync()
     {
         gameId = gameId ?? "Not provided";
+        routingService.setGameId(gameId);
         try
         {
             string response = await HttpClient.GetStringAsync("https://sleepy-falls-41701.herokuapp.com/AI/get?id=" + gameId);
             gameBoard = JsonConvert.DeserializeObject<List<PieceAI>>(response);
         }
-        catch (Exception) {
+        catch (Exception)
+        {
             failedFetch = true;
         }
     }
@@ -170,9 +171,192 @@ else
             string response = await HttpClient.GetStringAsync("https://sleepy-falls-41701.herokuapp.com/AI/get?id=c1JsF");
             gameBoard = JsonConvert.DeserializeObject<List<PieceAI>>(response);
         }
-        catch (Exception) {
+        catch (Exception)
+        {
             failedFetch = true;
         }
+    }
+
+    public string buildFEN(int l, int licz)
+    {
+        var FEN = "";
+        if (gameBoard[l].Piece == "White-King")
+        {
+            if (licz > 0)
+            {
+                FEN += licz.ToString() + "K";
+                licz = 0;
+            }
+            else
+            {
+                FEN += "K";
+            }
+        }
+        if (gameBoard[l].Piece == "Black-King")
+        {
+            if (licz > 0)
+            {
+                FEN += licz.ToString() + "k";
+                licz = 0;
+            }
+            else
+            {
+                FEN += "k";
+            }
+        }
+        if (gameBoard[l].Piece == "White-Queen")
+        {
+            if (licz > 0)
+            {
+                FEN += licz.ToString() + "Q";
+                licz = 0;
+            }
+            else
+            {
+                FEN += "Q";
+            }
+        }
+        if (gameBoard[l].Piece == "Black-Queen")
+        {
+            if (licz > 0)
+            {
+                FEN += licz.ToString() + "q";
+                licz = 0;
+            }
+            else
+            {
+                FEN += "q";
+            }
+        }
+        if (gameBoard[l].Piece == "White-Pawn")
+        {
+            if (licz > 0)
+            {
+                FEN += licz.ToString() + "P";
+                licz = 0;
+            }
+            else
+            {
+                FEN += "P";
+            }
+        }
+        if (gameBoard[l].Piece == "Black-Pawn")
+        {
+            if (licz > 0)
+            {
+                FEN += licz.ToString() + "p";
+                licz = 0;
+            }
+            else
+            {
+                FEN += "p";
+            }
+        }
+        if (gameBoard[l].Piece == "White-Bishop")
+        {
+            if (licz > 0)
+            {
+                FEN += licz.ToString() + "B";
+                licz = 0;
+            }
+            else
+            {
+                FEN += "B";
+            }
+        }
+        if (gameBoard[l].Piece == "Black-Bishop")
+        {
+            if (licz > 0)
+            {
+                FEN += licz.ToString() + "b";
+                licz = 0;
+            }
+            else
+            {
+                FEN += "b";
+            }
+        }
+        if (gameBoard[l].Piece == "White-Rook")
+        {
+            if (licz > 0)
+            {
+                FEN += licz.ToString() + "R";
+                licz = 0;
+            }
+            else
+            {
+                FEN += "R";
+            }
+        }
+        if (gameBoard[l].Piece == "Black-Rook")
+        {
+            if (licz > 0)
+            {
+                FEN += licz.ToString() + "r";
+                licz = 0;
+            }
+            else
+            {
+                FEN += "r";
+            }
+        }
+        if (gameBoard[l].Piece == "White-Knight")
+        {
+            if (licz > 0)
+            {
+                FEN += licz.ToString() + "N";
+                licz = 0;
+            }
+            else
+            {
+                FEN += "N";
+            }
+        }
+        if (gameBoard[l].Piece == "Black-Knight")
+        {
+            if (licz > 0)
+            {
+                FEN += licz.ToString() + "n";
+                licz = 0;
+            }
+            else
+            {
+                FEN += "n";
+            }
+        }
+        return FEN;
+    }
+
+    public string generateFEN()
+    {
+        var l = 0;
+        var licz = 0;
+        var FEN = "";
+        for (int i = 0; i < 8; i++)
+        {
+            for (int j = 0; j < 8; j++)
+            {
+                FEN += buildFEN(l, licz);
+                if (gameBoard[l].Piece == "Empty")
+                {
+                    licz++;
+                }
+                if ((j + 1) % 8 == 0)
+                {
+                    if (licz > 0)
+                    {
+                        FEN += licz.ToString() + "/";
+                        licz = 0;
+                    }
+                    else
+                    {
+                        FEN += "/";
+                    }
+                }
+                l += 1;
+            }
+        }
+        return FEN;
     }
     public string GetPiece(PieceAI piece)
     {

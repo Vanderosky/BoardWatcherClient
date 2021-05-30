@@ -31,10 +31,21 @@
     protected override void OnInitialized()
     {
         gameId = RoutingService.getGameId();
+        _ = listenForGameId();
     }
 
     private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
+    }
+
+    async Task listenForGameId()
+    {
+        while (RoutingService.getGameId() == "0")
+        {
+            await Task.Delay(50);
+            gameId = RoutingService.getGameId();
+            await Task.Delay(2000);
+        }
     }
 }
