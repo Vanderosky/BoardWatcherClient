@@ -168,7 +168,7 @@ else
     {
         try
         {
-            string response = await HttpClient.GetStringAsync("https://sleepy-falls-41701.herokuapp.com/AI/get?id=c1JsF");
+            string response = await HttpClient.GetStringAsync("https://sleepy-falls-41701.herokuapp.com/AI/get?id="  + gameId);
             gameBoard = JsonConvert.DeserializeObject<List<PieceAI>>(response);
         }
         catch (Exception)
