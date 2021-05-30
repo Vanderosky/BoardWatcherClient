@@ -141,7 +141,7 @@ else
         <button class="btn btn-primary" @onclick="fetchBoard"> <span aria-hidden="true">Refresh</span></button>
     </div>
     <div class="center fen-area">
-        <input @bind="fonCode" @onclick="CopyFonCodeToClipboard" readonly />
+        <input @bind="fenCode" @onclick="CopyFenCodeToClipboard" readonly />
     </div>
     <div class="center">
         @if (copied)
@@ -156,7 +156,7 @@ else
     private readonly HttpClient httpClient;
     private Boolean failedFetch = false;
     private Boolean copied = false;
-    private string fonCode = "";
+    private string fenCode = "";
     [Parameter]
     public string gameId { get; set; }
     [Parameter]
@@ -169,7 +169,7 @@ else
         {
             string response = await HttpClient.GetStringAsync("https://sleepy-falls-41701.herokuapp.com/AI/get?id=" + gameId);
             gameBoard = JsonConvert.DeserializeObject<List<PieceAI>>(response);
-            fonCode = generateFON();
+            fenCode = generateFen();
         }
         catch (Exception)
         {
@@ -183,14 +183,14 @@ else
         {
             string response = await HttpClient.GetStringAsync("https://sleepy-falls-41701.herokuapp.com/AI/get?id=" + gameId);
             gameBoard = JsonConvert.DeserializeObject<List<PieceAI>>(response);
-            fonCode = generateFON();
+            fenCode = generateFen();
         }
         catch (Exception)
         {
             failedFetch = true;
         }
     }
-    public string generateFON()
+    public string generateFen()
     {
         int l = 0;
         int counter = 0;
@@ -320,18 +320,15 @@ else
             }
             fen += "/";
         }
+        fen = fen.Remove(fen.Length - 1);
         return fen;
     }
 
-    private async Task CopyTextToClipboard()
-    {
-        await JSRuntime.InvokeVoidAsync("clipboardCopy.copyText", fonCode);
-    }
-    async Task CopyFonCodeToClipboard()
+    async Task CopyFenCodeToClipboard()
     {
         try
         {
-            await ClipboardService.WriteTextAsync(fonCode);
+            await ClipboardService.WriteTextAsync(fenCode);
         }
         catch { return; }
         copied = true;

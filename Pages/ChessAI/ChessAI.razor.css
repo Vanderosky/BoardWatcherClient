@@ -42,7 +42,9 @@
     margin-left: 5em;
   }
 
-  .pgn-mobile {
+  input {
+    width: 30em;
+    text-align: center; 
   }
 }
 @media (max-width:576px) {
@@ -79,6 +81,11 @@
     margin-top: 0.5em;
     margin-left: 0.5em;
     margin-right: 0.5em;
+  }
+
+  input {
+    width: 40%;
+    text-align: center; 
   }
 }
 
