@@ -4,6 +4,7 @@
 @using Newtonsoft.Json
 @using System.Net.Http
 @inject HttpClient HttpClient
+@inject ClipboardService ClipboardService
 @inject ChessGameStateService GameStateService
 @inject IJSRuntime JSRuntime
 @inject HttpClient Http
@@ -139,12 +140,23 @@ else
     <div class="center pgn-mobile">
         <button class="btn btn-primary" @onclick="fetchBoard"> <span aria-hidden="true">Refresh</span></button>
     </div>
+    <div class="center fen-area">
+        <input @bind="fonCode" @onclick="CopyFonCodeToClipboard" readonly />
+    </div>
+    <div class="center">
+        @if (copied)
+        {
+            <p>Copied to clipboard!</p>
+        }
+    </div>
 }
 
 @code {
     private List<PieceAI> gameBoard;
     private readonly HttpClient httpClient;
     private Boolean failedFetch = false;
+    private Boolean copied = false;
+    private string fonCode = "";
     [Parameter]
     public string gameId { get; set; }
     [Parameter]
@@ -157,6 +169,7 @@ else
         {
             string response = await HttpClient.GetStringAsync("https://sleepy-falls-41701.herokuapp.com/AI/get?id=" + gameId);
             gameBoard = JsonConvert.DeserializeObject<List<PieceAI>>(response);
+            fonCode = generateFON();
         }
         catch (Exception)
         {
@@ -168,195 +181,160 @@ else
     {
         try
         {
-            string response = await HttpClient.GetStringAsync("https://sleepy-falls-41701.herokuapp.com/AI/get?id="  + gameId);
+            string response = await HttpClient.GetStringAsync("https://sleepy-falls-41701.herokuapp.com/AI/get?id=" + gameId);
             gameBoard = JsonConvert.DeserializeObject<List<PieceAI>>(response);
+            fonCode = generateFON();
         }
         catch (Exception)
         {
             failedFetch = true;
         }
     }
-
-    public string buildFEN(int l, int licz)
+    public string generateFON()
     {
-        var FEN = "";
-        if (gameBoard[l].Piece == "White-King")
-        {
-            if (licz > 0)
-            {
-                FEN += licz.ToString() + "K";
-                licz = 0;
-            }
-            else
-            {
-                FEN += "K";
-            }
-        }
-        if (gameBoard[l].Piece == "Black-King")
-        {
-            if (licz > 0)
-            {
-                FEN += licz.ToString() + "k";
-                licz = 0;
-            }
-            else
-            {
-                FEN += "k";
-            }
-        }
-        if (gameBoard[l].Piece == "White-Queen")
-        {
-            if (licz > 0)
-            {
-                FEN += licz.ToString() + "Q";
-                licz = 0;
-            }
-            else
-            {
-                FEN += "Q";
-            }
-        }
-        if (gameBoard[l].Piece == "Black-Queen")
-        {
-            if (licz > 0)
-            {
-                FEN += licz.ToString() + "q";
-                licz = 0;
-            }
-            else
-            {
-                FEN += "q";
-            }
-        }
-        if (gameBoard[l].Piece == "White-Pawn")
-        {
-            if (licz > 0)
-            {
-                FEN += licz.ToString() + "P";
-                licz = 0;
-            }
-            else
-            {
-                FEN += "P";
-            }
-        }
-        if (gameBoard[l].Piece == "Black-Pawn")
-        {
-            if (licz > 0)
-            {
-                FEN += licz.ToString() + "p";
-                licz = 0;
-            }
-            else
-            {
-                FEN += "p";
-            }
-        }
-        if (gameBoard[l].Piece == "White-Bishop")
-        {
-            if (licz > 0)
-            {
-                FEN += licz.ToString() + "B";
-                licz = 0;
-            }
-            else
-            {
-                FEN += "B";
-            }
-        }
-        if (gameBoard[l].Piece == "Black-Bishop")
-        {
-            if (licz > 0)
-            {
-                FEN += licz.ToString() + "b";
-                licz = 0;
-            }
-            else
-            {
-                FEN += "b";
-            }
-        }
-        if (gameBoard[l].Piece == "White-Rook")
-        {
-            if (licz > 0)
-            {
-                FEN += licz.ToString() + "R";
-                licz = 0;
-            }
-            else
-            {
-                FEN += "R";
-            }
-        }
-        if (gameBoard[l].Piece == "Black-Rook")
-        {
-            if (licz > 0)
-            {
-                FEN += licz.ToString() + "r";
-                licz = 0;
-            }
-            else
-            {
-                FEN += "r";
-            }
-        }
-        if (gameBoard[l].Piece == "White-Knight")
-        {
-            if (licz > 0)
-            {
-                FEN += licz.ToString() + "N";
-                licz = 0;
-            }
-            else
-            {
-                FEN += "N";
-            }
-        }
-        if (gameBoard[l].Piece == "Black-Knight")
-        {
-            if (licz > 0)
-            {
-                FEN += licz.ToString() + "n";
-                licz = 0;
-            }
-            else
-            {
-                FEN += "n";
-            }
-        }
-        return FEN;
-    }
-
-    public string generateFEN()
-    {
-        var l = 0;
-        var licz = 0;
-        var FEN = "";
+        int l = 0;
+        int counter = 0;
+        string fen = "";
         for (int i = 0; i < 8; i++)
         {
+            counter = 0;
             for (int j = 0; j < 8; j++)
             {
-                FEN += buildFEN(l, licz);
-                if (gameBoard[l].Piece == "Empty")
+                if (gameBoard[l].Piece == "White-King")
                 {
-                    licz++;
+                    if (counter > 0)
+                    {
+                        fen += counter.ToString();
+                        counter = 0;
+                    }
+                    fen += "K";
                 }
-                if ((j + 1) % 8 == 0)
+                else if (gameBoard[l].Piece == "Black-King")
                 {
-                    if (licz > 0)
+                    if (counter > 0)
                     {
-                        FEN += licz.ToString() + "/";
-                        licz = 0;
+                        fen += counter.ToString();
+                        counter = 0;
                     }
-                    else
+                    fen += "k";
+                }
+                else if (gameBoard[l].Piece == "White-Queen")
+                {
+                    if (counter > 0)
                     {
-                        FEN += "/";
+                        fen += counter.ToString();
+                        counter = 0;
                     }
+                    fen += "Q";
+                }
+                else if (gameBoard[l].Piece == "Black-Queen")
+                {
+                    if (counter > 0)
+                    {
+                        fen += counter.ToString();
+                        counter = 0;
+                    }
+                    fen += "q";
+                }
+                else if (gameBoard[l].Piece == "White-Pawn")
+                {
+                    if (counter > 0)
+                    {
+                        fen += counter.ToString();
+                        counter = 0;
+                    }
+                    fen += "P";
+                }
+                else if (gameBoard[l].Piece == "Black-Pawn")
+                {
+                    if (counter > 0)
+                    {
+                        fen += counter.ToString();
+                        counter = 0;
+                    }
+                    fen += "p";
+                }
+                else if (gameBoard[l].Piece == "White-Bishop")
+                {
+                    if (counter > 0)
+                    {
+                        fen += counter.ToString();
+                        counter = 0;
+                    }
+                    fen += "B";
+                }
+                else if (gameBoard[l].Piece == "Black-Bishop")
+                {
+                    if (counter > 0)
+                    {
+                        fen += counter.ToString();
+                        counter = 0;
+                    }
+                    fen += "b";
+                }
+                else if (gameBoard[l].Piece == "White-Rook")
+                {
+                    if (counter > 0)
+                    {
+                        fen += counter.ToString();
+                        counter = 0;
+                    }
+                    fen += "R";
+                }
+                else if (gameBoard[l].Piece == "Black-Rook")
+                {
+                    if (counter > 0)
+                    {
+                        fen += counter.ToString();
+                        counter = 0;
+                    }
+                    fen += "r";
+                }
+                else if (gameBoard[l].Piece == "White-Knight")
+                {
+                    if (counter > 0)
+                    {
+                        fen += counter.ToString();
+                        counter = 0;
+                    }
+                    fen += "N";
+                }
+                else if (gameBoard[l].Piece == "Black-Knight")
+                {
+                    if (counter > 0)
+                    {
+                        fen += counter.ToString();
+                        counter = 0;
+                    }
+                    fen += "n";
+                }
+                else
+                {
+                    counter += 1;
                 }
                 l += 1;
             }
+            if (counter > 0)
+            {
+                fen += counter.ToString();
+            }
+            fen += "/";
         }
-        return FEN;
+        return fen;
+    }
+
+    private async Task CopyTextToClipboard()
+    {
+        await JSRuntime.InvokeVoidAsync("clipboardCopy.copyText", fonCode);
+    }
+    async Task CopyFonCodeToClipboard()
+    {
+        try
+        {
+            await ClipboardService.WriteTextAsync(fonCode);
+        }
+        catch { return; }
+        copied = true;
     }
     public string GetPiece(PieceAI piece)
     {
