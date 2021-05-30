@@ -17,7 +17,7 @@ After short connecting, board on the left side should be visible together with m
 User can also enter into the game by including game ID in the link path, like this: https://localhost:5001/chess/CV/cvID, where last parameter is game ID
 ![Alt text](/img/example.png?raw=true "Example Photo")
 
-## Running source project
+## Running from source
 
 BoardWatcherClient requires [Dotnet-sdk](https://dotnet.microsoft.com/download) 5.0+ to run.
 
