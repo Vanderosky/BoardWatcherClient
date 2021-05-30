@@ -16,126 +16,136 @@
     </div>
 }
 
-@if (gameBoard == null)
+@if (gameBoard == null && !failedFetch)
 {
     <p><em>Loading...</em></p>
 }
+else if (failedFetch)
+{
+    <div class="center">
+        <h4>Failed loadiing Game, are you sure you entered correct Game ID?</h4>
+    </div>
+}
 else
 {
-    @* <div class="flex-container">
+    <div class="flex-container">
         <div class="flex-child center">
-        <table class="chess-board">
-        <tbody>
-        <tr>
-        <th></th>
-        <th>a</th>
-        <th>b</th>
-        <th>c</th>
-        <th>d</th>
-        <th>e</th>
-        <th>f</th>
-        <th>g</th>
-        <th>h</th>
-        </tr>
+            <table class="chess-board">
+                <tbody>
+                    <tr>
+                        <th></th>
+                        <th>a</th>
+                        <th>b</th>
+                        <th>c</th>
+                        <th>d</th>
+                        <th>e</th>
+                        <th>f</th>
+                        <th>g</th>
+                        <th>h</th>
+                    </tr>
 
-        <tr>
-        <th>8</th>
-        @for (var i = 0; i < 8; i++)
-        {
-        if (i % 2 == 0)
-        {
-        <td class="light">@GetPiece(gameBoard.pieces[0 + i])</td } else { <td class="dark">@GetPiece(gameBoard.pieces[1 +
-        i])</td>
-        }
-        }
-        </tr>
-        <tr>
-        <th>7</th>
-        @for (var i = 0; i < 8; i++)
-        {
-        if (i % 2 == 0)
-        {
-        <td class="dark">@GetPiece(gameBoard[8 + i])</td } else { <td class="light">@GetPiece(gameBoard[9 +
-        i])</td>
-        }
-        }
-        </tr>
-        <tr>
-        <th>6</th>
-        @for (var i = 0; i < 8; i++)
-        {
-        if (i % 2 == 0)
-        {
-        <td class="light">@GetPiece(gameBoard[16 + i])</td } else { <td class="dark">@GetPiece(gameBoard[17
-        + i])</td>
-        }
-        }
-        </tr>
-        <tr>
-        <th>5</th>
-        @for (var i = 0; i < 8; i++)
-        {
-        if (i % 2 == 0)
-        {
-        <td class="dark">@GetPiece(gameBoard[24 + i])</td } else { <td class="light">@GetPiece(gameBoard[25
-        + i])</td>
-        }
-        }
-        </tr>
-        <tr>
-        <th>4</th>
-        @for (var i = 0; i < 8; i++)
-        {
-        if (i % 2 == 0)
-        {
-        <td class="light">@GetPiece(gameBoard[32 + i])</td } else { <td class="dark">@GetPiece(gameBoard[33
-        + i])</td>
-        }
-        }
-        </tr>
-        <tr>
-        <th>3</th>
-        @for (var i = 0; i < 8; i++)
-        {
-        if (i % 2 == 0)
-        {
-        <td class="dark">@GetPiece(gameBoard[40 + i])</td } else { <td class="light">@GetPiece(gameBoard[41
-        + i])</td>
-        }
-        }
-        </tr>
-        <tr>
-        <th>2</th>
-        @for (var i = 0; i < 8; i++)
-        {
-        if (i % 2 == 0)
-        {
-        <td class="light">@GetPiece(gameBoard[48 + i])</td } else { <td class="dark">@GetPiece(gameBoard[49
-        + i])</td>
-        }
-        }
-        </tr>
-        <tr>
-        <th>1</th>
-        @for (var i = 0; i < 8; i++)
-        {
-        if (i % 2 == 0)
-        {
-        <td class="dark">@GetPiece(gameBoard[56 + i])</td } else { <td class="light">@GetPiece(gameBoard[57
-        + i])</td>
-        }
-        }
-        </tr>
-        </tbody>
-        </table>
+                    <tr>
+                        <th>8</th>
+                        @for (var i = 0; i < 8; i++)
+                        {
+                            if (i % 2 == 0)
+                            {
+                                <td class="light">@GetPiece(gameBoard[0 + i])</td } else { <td class="dark">@GetPiece(gameBoard[1 +
+                    i])</td>
+                            }
+                        }
+                    </tr>
+                    <tr>
+                        <th>7</th>
+                        @for (var i = 0; i < 8; i++)
+                        {
+                            if (i % 2 == 0)
+                            {
+                                <td class="dark">@GetPiece(gameBoard[8 + i])</td } else { <td class="light">@GetPiece(gameBoard[9 +
+                    i])</td>
+                            }
+                        }
+                    </tr>
+                    <tr>
+                        <th>6</th>
+                        @for (var i = 0; i < 8; i++)
+                        {
+                            if (i % 2 == 0)
+                            {
+                                <td class="light">@GetPiece(gameBoard[16 + i])</td } else { <td class="dark">@GetPiece(gameBoard[17
+                    + i])</td>
+                            }
+                        }
+                    </tr>
+                    <tr>
+                        <th>5</th>
+                        @for (var i = 0; i < 8; i++)
+                        {
+                            if (i % 2 == 0)
+                            {
+                                <td class="dark">@GetPiece(gameBoard[24 + i])</td } else { <td class="light">@GetPiece(gameBoard[25
+                    + i])</td>
+                            }
+                        }
+                    </tr>
+                    <tr>
+                        <th>4</th>
+                        @for (var i = 0; i < 8; i++)
+                        {
+                            if (i % 2 == 0)
+                            {
+                                <td class="light">@GetPiece(gameBoard[32 + i])</td } else { <td class="dark">@GetPiece(gameBoard[33
+                    + i])</td>
+                            }
+                        }
+                    </tr>
+                    <tr>
+                        <th>3</th>
+                        @for (var i = 0; i < 8; i++)
+                        {
+                            if (i % 2 == 0)
+                            {
+                                <td class="dark">@GetPiece(gameBoard[40 + i])</td } else { <td class="light">@GetPiece(gameBoard[41
+                    + i])</td>
+                            }
+                        }
+                    </tr>
+                    <tr>
+                        <th>2</th>
+                        @for (var i = 0; i < 8; i++)
+                        {
+                            if (i % 2 == 0)
+                            {
+                                <td class="light">@GetPiece(gameBoard[48 + i])</td } else { <td class="dark">@GetPiece(gameBoard[49
+                    + i])</td>
+                            }
+                        }
+                    </tr>
+                    <tr>
+                        <th>1</th>
+                        @for (var i = 0; i < 8; i++)
+                        {
+                            if (i % 2 == 0)
+                            {
+                                <td class="dark">@GetPiece(gameBoard[56 + i])</td } else { <td class="light">@GetPiece(gameBoard[57
+                    + i])</td>
+                            }
+                        }
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        </div> *@
+    </div>
+    <div class="center pgn-mobile">
+        <button class="btn btn-primary" @onclick="fetchBoard"> <span
+            aria-hidden="true">Refresh</span></button>
+    </div>
 }
 
 @code {
-    private ChessBoardAI gameBoard;
+    private List<PieceAI> gameBoard;
     private readonly HttpClient httpClient;
-    private readonly Uri RequestUri = new Uri("https://sleepy-falls-41701.herokuapp.com/AI/get?id=y06HK");
+    private Boolean failedFetch = false;
     [Parameter]
     public string gameId { get; set; }
     [Parameter]
@@ -143,26 +153,44 @@ else
     protected override async Task OnInitializedAsync()
     {
         gameId = gameId ?? "Not provided";
-        gameBoard = await Http.GetFromJsonAsync<ChessBoardAI>("https://sleepy-falls-41701.herokuapp.com/AI/get?id=y06HK");
+        try
+        {
+            string response = await HttpClient.GetStringAsync("https://sleepy-falls-41701.herokuapp.com/AI/get?id=" + gameId);
+            gameBoard = JsonConvert.DeserializeObject<List<PieceAI>>(response);
+        }
+        catch (Exception) {
+            failedFetch = true;
+        }
     }
 
-
+    async public Task fetchBoard()
+    {
+        try
+        {
+            string response = await HttpClient.GetStringAsync("https://sleepy-falls-41701.herokuapp.com/AI/get?id=c1JsF");
+            gameBoard = JsonConvert.DeserializeObject<List<PieceAI>>(response);
+        }
+        catch (Exception) {
+            failedFetch = true;
+        }
+    }
     public string GetPiece(PieceAI piece)
     {
-        switch (piece.piece)
+        switch (piece.Piece)
         {
             case "Black-Pawn":
-                return "♙";
+                return "♟";
             case "Black-Rook":
-                return "♖";
+                return "♜";
             case "Black-Knight":
-                return "♘";
+                return "♞";
             case "Black-Bishop":
-                return "♗";
+                return "♝";
             case "Black-Queen":
-                return "♕";
+                return "♛";
             case "Black-King":
-                return "♔";
+                return "♚";
+
             case "White-Pawn":
                 return "♙";
             case "White-Rook":

@@ -1,35 +1,76 @@
-.chess-board {
-  border-spacing: 0;
-  border-collapse: collapse;
-}
+@media (min-width: 577px) {
+  .chess-board td {
+    width: 1.5em;
+    height: 1.5em;
+    text-align: center;
+    font-size: 3.5em;
+    line-height: 0;
+  }
 
-.chess-board th {
-  padding: 0.5em;
-}
+  .chess-board {
+    border-spacing: 0;
+    border-collapse: collapse;
+  }
+  
+  .chess-board th {
+    padding: 0.5em;
+  }
+  
+  .chess-board th + th {
+    border-bottom: 1px solid #000;
+  }
+  
+  .chess-board th:first-child,
+  .chess-board td:last-child {
+    border-right: 1px solid #000;
+  }
+  
+  .chess-board tr:last-child td {
+    border-bottom: 1px solid;
+  }
+  
+  .chess-board th:empty {
+    border: none;
+  }
 
-.chess-board th + th {
-  border-bottom: 1px solid #000;
+  .btn {
+    margin-top: 1em;
+    margin-inline: 5px;
+  }
+  
+  .stateMenu {
+    margin-left: 5em;
+  }
 }
+@media (max-width:576px) {
+  .chess-board td {
+    width: 1.3em;
+    height: 1.3em;
+    text-align: center;
+    font-size: 1.5em;
+    line-height: 0;
+  }
 
-.chess-board th:first-child,
-.chess-board td:last-child {
-  border-right: 1px solid #000;
-}
+  .chess-board th + th {
+    border-bottom: 1px solid #000;
+  }
+  
+  .chess-board th:first-child,
+  .chess-board td:last-child {
+    border-right: 1px solid #000;
+  }
+  
+  .chess-board tr:last-child td {
+    border-bottom: 1px solid;
+  }
+  
+  .chess-board th:empty {
+    border: none;
+  }
 
-.chess-board tr:last-child td {
-  border-bottom: 1px solid;
-}
-
-.chess-board th:empty {
-  border: none;
-}
-
-.chess-board td {
-  width: 1.5em;
-  height: 1.5em;
-  text-align: center;
-  font-size: 4em;
-  line-height: 0;
+  .btn {
+    width: 40%;
+  }
 }
 
 .chess-board .light {
@@ -38,15 +79,6 @@
 
 .chess-board .dark {
   background: #aaa;
-}
-
-.btn {
-  margin-top: 1em;
-  margin-inline: 5px;
-}
-
-.stateMenu {
-  margin-left: 5em;
 }
 
 .flex-container {
@@ -60,4 +92,14 @@
 .center {
   display: flex;
   justify-content: center;
+}
+
+.pgn-mobile {
+  margin-top: 1em;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+.updated-mobile {
+  margin-top: 10px;
 }
