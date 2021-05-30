@@ -2,6 +2,7 @@
 
 @using BoardWatcherClient
 @inject ChessGameStateService GameStateService
+@inject RoutingService routingService
 @inject IJSRuntime JSRuntime
 @using System.Text
 @using System.Threading
@@ -382,6 +383,7 @@
     protected override async Task OnInitializedAsync()
     {
         gameId = gameId ?? "Not provided";
+        routingService.setGameId(gameId);
         gameBoards.Add(await GameStateService.GetPieceData());
         moveCounter = 0;
         moveInNotationCount = 0;
